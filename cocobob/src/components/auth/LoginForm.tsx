@@ -4,7 +4,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 
-import ErrorMessage from '../../components/auth/ErrorMessage';
+import ErrorMessage from '../common/ErrorMessage';
 
 const LoginForm = () => {
   return (
@@ -36,9 +36,9 @@ const LoginForm = () => {
           type="password"
         />
       </form>
-      {/* {error.error?.message !== undefined && (
+      {error.error?.message !== undefined && (
         <ErrorMessage>{'로 그 인 실 패 !'}</ErrorMessage>
-      )} */}
+      )}
     </Container>
   );
 };

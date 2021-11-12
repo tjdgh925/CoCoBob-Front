@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-import LoginHeader from '../../components/auth/LoginHeader';
+import LoginHeader from '../../components/common/Header';
 import LoginForm from '../../components/auth/LoginForm';
 import LoginFooter from '../../components/auth/LoginFooter';
 import LoginButtons from '../../components/auth/LoginButtons';
