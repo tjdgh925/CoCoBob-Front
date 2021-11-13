@@ -51,7 +51,7 @@ const RegisterPage = () => {
         });
       // dispatch(register(signUpInfo));
     },
-    [birthday]
+    [birthday, signUpInfo]
   );
 
   const onChange = useCallback(
