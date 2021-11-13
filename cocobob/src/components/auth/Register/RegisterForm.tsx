@@ -71,7 +71,7 @@ const RegisterForm = ({
       <Box className={classes.passwordBox}>
         <TextField
           placeholder="비밀번호 입력"
-          name="password"
+          name="user_pw"
           value={signUpInfo.user_pw}
           onChange={onChange}
           fullWidth

@@ -9,6 +9,8 @@ import RegisterHeader from '../../components/auth/Register/RegisterHeader';
 import RegisterForm from '../../components/auth/Register/RegisterForm';
 import RegisterButton from '../../components/auth/Register/RegisterButton';
 import { signUpData } from '../../types/types';
+import { useDispatch } from 'react-redux';
+import { register } from '../../features/auth/slices';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,9 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const RegisterPage = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [birthday, setBirthday] = useState<Date | null>(new Date());
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+
   const [signUpInfo, setSignUpInfo] = useState<signUpData>({
     email: '',
     user_pw: '',
@@ -49,9 +53,9 @@ const RegisterPage = () => {
           ...signUpInfo,
           birth: birthday.toISOString().slice(0, 10).replace(/-/g, ''),
         });
-      // dispatch(register(signUpInfo));
+      dispatch(register(signUpInfo));
     },
-    [birthday, signUpInfo]
+    [birthday, signUpInfo, dispatch]
   );
 
   const onChange = useCallback(

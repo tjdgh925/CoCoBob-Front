@@ -33,6 +33,22 @@ export const authSlice = createSlice({
       state.error.error = action.payload;
       state.auth = false;
     },
+    register(state, action: PayloadAction<signUpData>) {
+      state.error.loading = true;
+      state.error.error = null;
+      state.auth = null;
+      state.data = action.payload;
+    },
+    registerSuccess(state, action: PayloadAction<boolean>) {
+      state.error.loading = false;
+      state.error.error = null;
+      state.auth = action.payload;
+    },
+    registerFailure(state, action: PayloadAction<AxiosError>) {
+      state.error.loading = false;
+      state.error.error = action.payload;
+      state.auth = false;
+    },
     tempSetUser(state, action: PayloadAction<loginData>) {
       state.error.loading = true;
       state.data = action.payload;
@@ -60,6 +76,9 @@ export const {
   login,
   loginSuccess,
   loginFailure,
+  register,
+  registerSuccess,
+  registerFailure,
   tempSetUser,
   check,
   checkSuccess,
