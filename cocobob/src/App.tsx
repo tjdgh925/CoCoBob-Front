@@ -1,5 +1,4 @@
-import './App.css';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PostListPage from './pages/post/PostListPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
@@ -12,13 +11,15 @@ function App() {
   return (
     <>
       <Responsive>
-        <Route element={<PostListPage />} path={'/@:username/*'} />
-        <Route element={<PostListPage />} path={'/*'} />
-        <Route element={<LoginPage />} path="/login/*" />
-        <Route element={<RegisterPage />} path="/register/*" />
-        <Route element={<WritePage />} path="/write/*" />
-        <Route element={<PostPage />} path="/@:username/:postId/*" />
-        <Route element={<ProfilePage />} path="/profile/@:username" />
+        <Routes>
+          <Route element={<PostListPage />} path={'/@:username/*'} />
+          <Route element={<PostListPage />} path={'/*'} />
+          <Route element={<LoginPage />} path="/login/*" />
+          <Route element={<RegisterPage />} path="/register/*" />
+          <Route element={<WritePage />} path="/write/*" />
+          <Route element={<PostPage />} path="/@:username/:postId/*" />
+          <Route element={<ProfilePage />} path="/profile/@:username" />
+        </Routes>
       </Responsive>
     </>
   );
