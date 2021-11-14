@@ -1,46 +1,39 @@
 import { Link } from 'react-router-dom';
-import clsx from 'clsx';
+import styled, { css } from 'styled-components';
 
-import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+const buttonStyle = css<{ color?: string }>`
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  font-size: 1.125rem;
+  background: ${(props) => (props.color ? props.color : 'gray')};
+  &:hover {
+    background: black;
+  }
+`;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      color: 'white',
-      height: 50,
-      fontSize: 25,
-    },
-    buttonLogin: {
-      marginTop: theme.spacing(2),
-      backgroundColor: '#95519B',
-      marginBottom: theme.spacing(1),
-    },
-    buttonSignUp: {
-      backgroundColor: '#6E6B6F',
-    },
-  })
-);
+const ButtonsBlock = styled.div``;
+
+const StyledButton = styled.button`
+  ${buttonStyle}
+  margin-bottom: .8rem;
+`;
 
 const LoginButtons = () => {
-  const classes = useStyles();
-
   return (
-    <Box>
-      <Button className={clsx(classes.button, classes.buttonLogin)} fullWidth>
-        로그인
-      </Button>
-
+    <ButtonsBlock>
+      <StyledButton color={'green'}>로그인</StyledButton>
       <Link to="/register">
-        <Button
-          fullWidth
-          className={clsx(classes.button, classes.buttonSignUp)}
-        >
-          회원가입
-        </Button>
+        <StyledButton>회원가입</StyledButton>
       </Link>
-    </Box>
+    </ButtonsBlock>
   );
 };
 
