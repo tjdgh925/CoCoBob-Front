@@ -1,34 +1,15 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 
-import Container from '@material-ui/core/Container';
-import Card from '@material-ui/core/Card';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-
-import Header from '../../components/common/Header';
-import RegisterHeader from '../../components/auth/Register/RegisterHeader';
+import AuthHeader from '../../components/common/AuthHeader';
 import RegisterForm from '../../components/auth/Register/RegisterForm';
 import RegisterButton from '../../components/auth/Register/RegisterButton';
+import styled from 'styled-components';
+
 import { signUpData } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/slices';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      textAlign: 'center',
-    },
-    card: {
-      marginTop: theme.spacing(10),
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-      border: '1px solid black',
-      boxShadow: 'none',
-    },
-  })
-);
-
 const RegisterPage = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [birthday, setBirthday] = useState<Date | null>(new Date());
@@ -41,21 +22,54 @@ const RegisterPage = () => {
     birth: '',
   });
 
+  const RegisterBlock = styled.div`
+    position: absolute;
+    left: 0;
+    top: 8%;
+    bottom: 0;
+    right: 0;
+    // background: #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+  const RegisterBox = styled.div`
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    background: white;
+    border: #e3e3e3 2px solid;
+    padding: 3rem 7rem 5rem 7rem;
+    text-align: center;
+    border-radius: 20px;
+  `;
+
+  const Spacer = styled.div`
+    padding: 2rem;
+  `;
+
   const checkPassword = (passwordConfirm: string): boolean => {
     if (passwordConfirm === signUpInfo.user_pw) return false;
     else return true;
   };
 
+  useEffect(() => {
+    if (birthday !== null) {
+      const temp =
+        parseInt(birthday.toISOString().slice(0, 10).replace(/-/g, '')) + 1;
+      setSignUpInfo({
+        ...signUpInfo,
+        birth: temp.toString(),
+      });
+    }
+  }, [birthday]);
+
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (birthday instanceof Date)
-        setSignUpInfo({
-          ...signUpInfo,
-          birth: birthday.toISOString().slice(0, 10).replace(/-/g, ''),
-        });
       dispatch(register(signUpInfo));
     },
-    [birthday, signUpInfo, dispatch]
+    [signUpInfo, dispatch]
   );
 
   const onChange = useCallback(
@@ -74,26 +88,25 @@ const RegisterPage = () => {
   );
 
   return (
-    <Container className={classes.container}>
-      <Header />
-      <Card className={classes.card} variant={'outlined'}>
-        <RegisterHeader />
-        <Container>
-          <RegisterForm
-            signUpInfo={signUpInfo}
-            passwordConfirm={passwordConfirm}
-            onChange={onChange}
-            checkPassword={checkPassword}
-            birthday={birthday}
-            setBirthday={setBirthday}
-          />
-          {/* {error.error?.message !== undefined && (
-            <ErrorMessage>{'회 원 가 입  실 패 !'}</ErrorMessage>
-          )} */}
-          <RegisterButton onSubmit={onSubmit} />
-        </Container>
-      </Card>
-    </Container>
+    <RegisterBlock>
+      <RegisterBox>
+        <AuthHeader />
+        <RegisterForm
+          signUpInfo={signUpInfo}
+          passwordConfirm={passwordConfirm}
+          onChange={onChange}
+          checkPassword={checkPassword}
+          birthday={birthday}
+          setBirthday={setBirthday}
+        />
+        {/* {error.error?.message !== undefined ? (
+          <ErrorMessage>{'회 원 가 입  실 패 !'}</ErrorMessage>
+        ) : (
+          <Spacer />
+        )} */}
+        <RegisterButton onSubmit={onSubmit} />
+      </RegisterBox>
+    </RegisterBlock>
   );
 };
 
