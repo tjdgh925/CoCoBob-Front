@@ -5,12 +5,12 @@ import RegisterPage from './pages/auth/RegisterPage';
 import WritePage from './pages/post/WritePage';
 import PostPage from './pages/post/PostPage';
 import ProfilePage from './pages/profile/ProfilePage';
-import Responsive from './components/common/Responsive';
+
 
 function App() {
   return (
     <>
-      <Responsive>
+
         <Routes>
           <Route element={<PostListPage />} path={'/@:username/*'} />
           <Route element={<PostListPage />} path={'/*'} />
@@ -18,9 +18,9 @@ function App() {
           <Route element={<RegisterPage />} path="/register/*" />
           <Route element={<WritePage />} path="/write/*" />
           <Route element={<PostPage />} path="/@:username/:postId/*" />
-          <Route element={<ProfilePage />} path="/profile/@:username" />
+          <Route element={<ProfilePage />} path="/profile/*" />
         </Routes>
-      </Responsive>
+
     </>
   );
 }

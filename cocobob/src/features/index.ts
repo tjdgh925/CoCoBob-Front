@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import authReducer from './auth/slices';
+import profileReducer from './profile/slices';
 import { check, tempSetUser } from './auth/slices';
 import { all } from 'redux-saga/effects';
 import { loginData, signUpData } from '../types/types';
@@ -11,6 +12,7 @@ const tempData: loginData | signUpData = JSON.parse(
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  profile: profileReducer
 });
 
 function* rootSaga() {}
