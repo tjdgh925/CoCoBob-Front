@@ -14,7 +14,7 @@ function App() {
       <HeaderTab />
       <Route component={HomePage} path="/" exact />
       <Responsive>
-        <Route component={PostListPage} path="/@:username" exact />
+        <Route component={PostListPage} path="/post" exact />
         <Route component={LoginPage} path="/login" exact />
         <Route component={RegisterPage} path="/register" exact />
         <Route component={WritePage} path="/write" exact />
