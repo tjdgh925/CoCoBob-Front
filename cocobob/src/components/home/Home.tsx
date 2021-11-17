@@ -6,33 +6,45 @@ const Container = styled.div`
     flex-direction: column;
     margin: 0px;
     padding: 0px;
+    z-index: -2;
 `;
 const MainDiv = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100vw;
     height: 70vh;
     background-color: #D3B6DA;
     margin: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: -2;
 `;
 const BobImg = styled.img`
     position: relative;
     width: 20vw;
     height: auto;
     display: inline-block;
-    margin: 12.5vh 10vw;
-    float: left;
+    margin: 10vh 10vw;
+    z-index: -1;
+`;
+const TextDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    z-index: -2;
 `;
 const MainText = styled.div`
     font-size: 2rem;
     white-space: pre-wrap;
     color: white;
-    padding-top: 20vh;
-    margin-bottom: 5vh;
+    margin: 2vh 0;
+    z-index: -2;
 `;
 const SubText = styled.div`
     font-size: 1rem;
     color: white;
     white-space: pre-wrap;
-    margin-bottom: 5vh;
+    margin-bottom: 4vh;
+    z-index: -2;
 `;
 const LoginBtn = styled.button`
     background-color: white;
@@ -41,6 +53,7 @@ const LoginBtn = styled.button`
     width: 20vw;
     height: 8vh;
     font-size: 1.5rem;
+    z-index: -2;
 `;
 const SubDiv = styled.div`
     margin: 0;
@@ -53,34 +66,53 @@ const SubDiv = styled.div`
     align-items: center;
     flex-direction: row;
     justify-content: center;
+    z-index: -2;
 `;
 const MainText2 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 2rem;
     white-space: pre-wrap;
     color: white;
     margin: 0;
+    z-index: -2;
 `;
 const StepDiv = styled.div`
+    display: flex;
+    flex-direction: column;
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 150vh;
+    z-index: -2;
 `;
 const StepMainText = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
     font-size: 1.6rem;
     white-space: pre-wrap;
     padding: 12vh 0 0 0;
+    z-index: -2;
 `;
 const StepSubText = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
     font-size: .7rem;
     white-space: pre-wrap;
     padding: 3vh 0 0 0;
+    z-index: -2;
 `;
 const StepOne = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100vw;
     height: 50vh;
     margin: 0;
     padding: 0;
+    z-index: -2;
 `;
 const OneImg = styled.img`
     position: relative;
@@ -88,20 +120,26 @@ const OneImg = styled.img`
     height: auto;
     display: inline-block;
     margin: 0 12vw;
-    padding: 5vh 0;
-    float: left;
+    padding: 8vh 0;
+    z-index: -1;
 `;
 const StepTwo = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100vw;
     height: 50vh;
     margin: 0;
     padding: 0;
+    z-index: -2;
 `;
 const StepThree = styled.div`
+    display: flex;
+    flex-direction: row;
     width: 100vw;
     height: 50vh;
     margin: 0;
     padding: 0;
+    z-index: -2;
 `;
 
 const Home = () => {
@@ -118,9 +156,11 @@ const Home = () => {
         <Container>
             <MainDiv>
                 <BobImg src="img/BOB.png" alt="" />
-                <MainText>{mainText}</MainText>
-                <SubText>{subText}</SubText>
-                <LoginBtn>로그인</LoginBtn>
+                <TextDiv>
+                    <MainText>{mainText}</MainText>
+                    <SubText>{subText}</SubText>
+                    <LoginBtn>로그인</LoginBtn>
+                </TextDiv>
             </MainDiv>
             <SubDiv>
                 <MainText2>{mainText2}</MainText2>
@@ -128,18 +168,24 @@ const Home = () => {
             <StepDiv>
                 <StepOne>
                     <OneImg src="img/CatholicLogo.png" alt="" />
-                    <StepMainText>{Step1Main}</StepMainText>
-                    <StepSubText>{Step1Sub}</StepSubText>
+                    <TextDiv>
+                        <StepMainText>{Step1Main}</StepMainText>
+                        <StepSubText>{Step1Sub}</StepSubText>
+                    </TextDiv>
                 </StepOne>
                 <StepTwo>
                     <OneImg src="img/step2.png" alt="" />
-                    <StepMainText>{Step2Main}</StepMainText>
-                    <StepSubText>{Step2Sub}</StepSubText>
+                    <TextDiv>
+                        <StepMainText>{Step2Main}</StepMainText>
+                        <StepSubText>{Step2Sub}</StepSubText>
+                    </TextDiv>
                 </StepTwo>
                 <StepThree>
                     <OneImg src="img/step3.png" alt="" />
-                    <StepMainText>{Step3Main}</StepMainText>
-                    <StepSubText>{Step3Sub}</StepSubText>
+                    <TextDiv>
+                        <StepMainText>{Step3Main}</StepMainText>
+                        <StepSubText>{Step3Sub}</StepSubText>
+                    </TextDiv>
                 </StepThree>
             </StepDiv>
         </Container>
