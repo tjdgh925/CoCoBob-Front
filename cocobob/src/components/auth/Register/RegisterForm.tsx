@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
-import { signUpData } from '../../../types/types';
+import { SignUpData } from '../../../types/types';
 import styled from 'styled-components';
 
 const RegisterFormBlock = styled.div`
@@ -70,7 +70,7 @@ const RadioButton = styled.input.attrs({
 })``;
 
 interface RegisterFormProps {
-  signUpInfo: signUpData;
+  signUpInfo: SignUpData;
   passwordConfirm: string;
   birthday: Date | null;
   setBirthday: (birthday: Date | null) => void;

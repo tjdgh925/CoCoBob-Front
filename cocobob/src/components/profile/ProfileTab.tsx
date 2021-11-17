@@ -19,7 +19,8 @@ const Tabs = styled.button<{ selected: boolean }>`
   text-align: center;
   width: auto;
   font-size: 1rem;
-  border-bottom: ${(props) => (props.selected === true ? '2px #817e7e solid' : 'none')};
+  border-bottom: ${(props) =>
+    props.selected === true ? '2px #817e7e solid' : 'none'};
 `;
 const Editbutton = styled.button`
   margin-left: 70%;

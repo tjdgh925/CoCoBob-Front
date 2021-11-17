@@ -1,18 +1,19 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import authReducer from './auth/slices';
+import postReducer from './post/slices';
 import profileReducer from './profile/slices';
 import { check, tempSetUser } from './auth/slices';
-import { all } from 'redux-saga/effects';
-import { loginData, signUpData } from '../types/types';
+import { LoginData, SignUpData } from '../types/types';
 
-const tempData: loginData | signUpData = JSON.parse(
+const tempData: LoginData | SignUpData = JSON.parse(
   localStorage.getItem('user') || '{}'
 );
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  profile: profileReducer
+  post: postReducer,
+  profile: profileReducer,
 });
 
 function* rootSaga() {}
