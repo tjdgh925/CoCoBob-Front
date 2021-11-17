@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import {
-  loginData,
-  loginState,
-  signUpData,
-  signUpState,
+  LoginData,
+  LoginState,
+  SignUpData,
+  SignUpState,
 } from '../../types/types';
 
-const initialState: loginState | signUpState = {
+const initialState: LoginState | SignUpState = {
   error: {
     loading: false,
     error: null,
@@ -20,7 +20,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<loginData>) {
+    login(state, action: PayloadAction<LoginData>) {
       state.error.loading = true;
       state.data = action.payload;
     },
@@ -33,7 +33,7 @@ export const authSlice = createSlice({
       state.error.error = action.payload;
       state.auth = false;
     },
-    register(state, action: PayloadAction<signUpData>) {
+    register(state, action: PayloadAction<SignUpData>) {
       state.error.loading = true;
       state.error.error = null;
       state.auth = null;
@@ -49,7 +49,7 @@ export const authSlice = createSlice({
       state.error.error = action.payload;
       state.auth = false;
     },
-    tempSetUser(state, action: PayloadAction<loginData>) {
+    tempSetUser(state, action: PayloadAction<LoginData>) {
       state.error.loading = true;
       state.data = action.payload;
     },

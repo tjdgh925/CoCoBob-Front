@@ -1,28 +1,50 @@
-export interface loginData {
+export interface LoginData {
   email: string;
   user_pw: string;
 }
 
-export interface signUpData {
+export interface SignUpData {
   email: string;
   user_pw: string;
   sex: string;
   birth: string;
 }
 
-export interface errorData {
+export interface ErrorData {
   loading: boolean;
   error: Error | null;
 }
 
-export interface loginState {
-  error: errorData;
+export interface LoginState {
+  error: ErrorData;
   auth: boolean | null;
-  data: loginData | null;
+  data: LoginData | null;
 }
 
-export interface signUpState {
+export interface SignUpState {
   auth: boolean | null;
-  error: errorData;
-  data: signUpData | null;
+  error: ErrorData;
+  data: SignUpData | null;
+}
+
+export interface PostInputData {
+  title: string;
+  tag: string;
+  contents: string;
+  deadline: string;
+}
+
+export interface PostState {
+  error: ErrorData;
+  data: PostInputData;
+  success: PostSuccessData | null;
+}
+
+export interface PostSuccessData {
+  id: number;
+  title: string;
+  username: string;
+  tag: string;
+  contents: string;
+  deadline: string;
 }
