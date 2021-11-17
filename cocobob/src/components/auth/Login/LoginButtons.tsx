@@ -1,37 +1,15 @@
 import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-
-const buttonStyle = css<{ color?: string }>`
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  outline: none;
-  cursor: pointer;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  width: 100%;
-  font-size: 1.125rem;
-  background: ${(props) => (props.color ? props.color : 'gray')};
-  &:hover {
-    background: black;
-  }
-`;
+import styled from 'styled-components';
+import Button from '../../common/Button';
 
 const ButtonsBlock = styled.div``;
-
-const StyledButton = styled.button`
-  ${buttonStyle}
-  margin-bottom: .8rem;
-`;
 
 const LoginButtons = () => {
   return (
     <ButtonsBlock>
-      <StyledButton color={'green'}>로그인</StyledButton>
+      <Button color={'green'}>로그인</Button>
       <Link to="/register">
-        <StyledButton>회원가입</StyledButton>
+        <Button>회원가입</Button>
       </Link>
     </ButtonsBlock>
   );
