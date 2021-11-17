@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import authReducer from './auth/slices';
 import postReducer from './post/slices';
 import profileReducer from './profile/slices';
+import postsListReducer from './postList/slices';
 import { check, tempSetUser } from './auth/slices';
 import { LoginData, SignUpData } from '../types/types';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   post: postReducer,
   profile: profileReducer,
+  postsList: postsListReducer,
 });
 
 function* rootSaga() {}
