@@ -5,6 +5,7 @@ import RegisterPage from './pages/auth/RegisterPage';
 import WritePage from './pages/post/WritePage';
 import PostPage from './pages/post/PostPage';
 import ProfilePage from './pages/profile/ProfilePage';
+import HomePage from './pages/home/HomePage';
 
 import HeaderTab from './components/common/HeaderTab';
 
@@ -13,6 +14,7 @@ function App() {
     <>
       <HeaderTab />
       <Routes>
+      <Route element={<HomePage />} path="/*" />
         <Route element={<PostListPage />} path={'/@:username/*'} />
         <Route element={<PostListPage />} path={'/*'} />
         <Route element={<LoginPage />} path="/login/*" />
