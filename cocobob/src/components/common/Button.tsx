@@ -9,9 +9,14 @@ interface ButtonProps {
   color?: string;
   onClick?: functionType;
   fullWidth?: boolean;
+  margin?: number;
 }
 
-const buttonStyle = css<{ color?: string; fullWidth?: boolean }>`
+const buttonStyle = css<{
+  color?: string;
+  fullWidth?: boolean;
+  margin?: number;
+}>`
   border: none;
   border-radius: 4px;
   font-size: 1rem;
@@ -46,6 +51,11 @@ const buttonStyle = css<{ color?: string; fullWidth?: boolean }>`
         background: black;
       }
     `}
+    ${(props) =>
+    props.margin &&
+    css`
+      margin-bottom: ${props.margin}rem;
+    `}
   &:disabled {
     background: white;
     color: gray;
@@ -55,13 +65,18 @@ const buttonStyle = css<{ color?: string; fullWidth?: boolean }>`
 
 const StyledButton = styled.button`
   ${buttonStyle}
-  margin-bottom: .8rem;
 `;
 
-const Button = ({ children, color, onClick, fullWidth }: ButtonProps) => {
+const Button = ({
+  children,
+  color,
+  onClick,
+  fullWidth,
+  margin,
+}: ButtonProps) => {
   console.log(children);
   return (
-    <StyledButton color={color} onClick={onClick} fullWidth>
+    <StyledButton color={color} onClick={onClick} margin={margin} fullWidth>
       {children}
     </StyledButton>
   );
