@@ -5,7 +5,7 @@ import RegisterForm from '../../components/auth/Register/RegisterForm';
 import RegisterButton from '../../components/auth/Register/RegisterButton';
 import styled from 'styled-components';
 
-import { signUpData } from '../../types/types';
+import { SignUpData } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/slices';
 
@@ -15,7 +15,7 @@ const RegisterPage = () => {
   const [birthday, setBirthday] = useState<Date | null>(new Date());
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
 
-  const [signUpInfo, setSignUpInfo] = useState<signUpData>({
+  const [signUpInfo, setSignUpInfo] = useState<SignUpData>({
     email: '',
     user_pw: '',
     sex: '',
