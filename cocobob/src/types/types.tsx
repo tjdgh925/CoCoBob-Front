@@ -48,3 +48,15 @@ export interface PostSuccessData {
   contents: string;
   deadline: string;
 }
+
+export interface PostListData {
+  tag: any;
+  username: any;
+  page: any;
+}
+
+export interface PostListState {
+  error: ErrorData;
+  data: PostListData | null;
+  success: PostSuccessData[] | null;
+}
