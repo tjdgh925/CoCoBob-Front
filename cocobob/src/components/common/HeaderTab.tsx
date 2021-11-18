@@ -6,6 +6,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/slices';
 import Button from './Button';
+import palette from '../../lib/styles/palette';
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -14,6 +15,7 @@ const HeaderBlock = styled.div`
   width: 100%;
   background: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 10;
 `;
 
 const Wrapper = styled(Responsive)`
@@ -36,6 +38,23 @@ const UserInfo = styled.div`
   font-weight: 800;
   margin-right: 1rem;
 `;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+  color: ${palette.pink};
+`;
+
+const LogoImage = styled.img`
+    width: 20px;
+    height: auto;
+    margin: 0 10px;
+`;
 
 const HeaderTab = () => {
   const LoginPageState = useTypedSelector((state) => state.auth);
@@ -49,18 +68,19 @@ const HeaderTab = () => {
     <>
       <HeaderBlock>
         <Wrapper>
-          <Link to="/" className="logo">
-            CoCoBob
-          </Link>
+          <StyledLink to="/" className="logo">
+            <LogoImage src="img/Connect.png" />
+            COCOBOB
+          </StyledLink>
           {auth ? (
             <div className="right">
               <UserInfo>{data && data.email}</UserInfo>
-              <Button onClick={onLogout}>로그아웃</Button>
+              <Button color={palette.pink} onClick={onLogout}>로그아웃</Button>
             </div>
           ) : (
             <div className="right">
               <Link to="/login">
-                <Button>로그인</Button>
+                <Button color={palette.pink}>로그인</Button>
               </Link>
             </div>
           )}
