@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
 
 const AuthHeaderBlock = styled.div`
   padding-bottom: 2rem;
@@ -17,7 +18,7 @@ const StyledLink = styled(Link)`
 `;
 
 const AuthHeaderText = styled.h2`
-  color: blue;
+  color: ${palette.pink};
   text-decoration: none;
 `;
 

@@ -4,11 +4,12 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { SignUpData } from '../../../types/types';
 import styled from 'styled-components';
+import palette from '../../../lib/styles/palette';
 
 const RegisterFormBlock = styled.div`
   h3 {
     margin: 0;
-    color: red;
+    color: black;
     padding-bottom: 4rem;
   }
 `;

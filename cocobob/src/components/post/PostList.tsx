@@ -7,6 +7,7 @@ import ErrorMessage from '../common/ErrorMessage';
 
 import Tags from '../common/Tags';
 import { PostSuccessData } from '../../types/types';
+import palette from '../../lib/styles/palette';
 
 interface PostItemProps {
   post: PostSuccessData;
@@ -65,7 +66,7 @@ const PostInfo = styled.div`
 `;
 
 const Title = styled.h3`
-  color: blue;
+  color: ${palette.pink};
 `;
 const Username = styled.h5`
   color: gray;

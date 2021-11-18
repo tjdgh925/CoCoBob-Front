@@ -10,12 +10,16 @@ interface ButtonProps {
   onClick?: functionType;
   fullWidth?: boolean;
   margin?: number;
+  fontColor?: string;
+  opacity?: string;
 }
 
 const buttonStyle = css<{
   color?: string;
   fullWidth?: boolean;
   margin?: number;
+  fontColor?: string;
+  opacity?: string;
 }>`
   border: none;
   border-radius: 4px;
@@ -52,9 +56,14 @@ const buttonStyle = css<{
       }
     `}
     ${(props) =>
-    props.margin &&
+    props.fontColor &&
     css`
-      margin-bottom: ${props.margin}rem;
+      color: ${props.fontColor};
+    `}
+    ${(props) =>
+    props.opacity &&
+    css`
+      opacity: ${props.opacity};
     `}
   &:disabled {
     background: white;
@@ -72,11 +81,18 @@ const Button = ({
   color,
   onClick,
   fullWidth,
-  margin,
+  fontColor,
+  opacity,
 }: ButtonProps) => {
   console.log(children);
   return (
-    <StyledButton color={color} onClick={onClick} margin={margin} fullWidth>
+    <StyledButton
+      color={color}
+      onClick={onClick}
+      fontColor={fontColor}
+      opacity={opacity}
+      fullWidth
+    >
       {children}
     </StyledButton>
   );

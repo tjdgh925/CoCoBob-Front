@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import ErrorMessage from '../../common/ErrorMessage';
+import palette from '../../../lib/styles/palette';
 
 const LoginFormBlock = styled.div`
   padding-bottom: 1rem;
   h3 {
     margin: 0;
-    color: red;
+    color: black;
     padding-bottom: 4rem;
   }
 `;

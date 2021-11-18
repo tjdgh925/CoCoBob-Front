@@ -6,13 +6,14 @@ import WritePage from './pages/post/WritePage';
 import PostPage from './pages/post/PostPage';
 import HomePage from './pages/home/HomePage';
 import HeaderTab from './components/common/HeaderTab';
+
 import Responsive from './components/common/Responsive';
 
 function App() {
   return (
     <>
       <HeaderTab />
-      <Route component={HomePage} path="/" exact />
+        <Route component={HomePage} path="/" exact/>
       <Responsive>
         <Route component={PostListPage} path="/post" exact />
         <Route component={LoginPage} path="/login" exact />
