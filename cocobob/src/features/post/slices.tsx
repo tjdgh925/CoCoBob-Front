@@ -26,6 +26,20 @@ export const postSlice = createSlice({
     updatePost(state, action: PayloadAction<PostInputData>) {
       state.data = action.payload;
     },
+    writePost(state, action: PayloadAction<PostInputData>) {
+      state.error.loading = true;
+      state.error.error = null;
+      state.data = action.payload;
+    },
+    writePostSuccess(state, action: PayloadAction<PostSuccessData>) {
+      state.error.loading = false;
+      state.error.error = null;
+      state.success = action.payload;
+    },
+    writePostFailure(state, action: PayloadAction<AxiosError>) {
+      state.error.loading = false;
+      state.error.error = action.payload;
+    },
     readPost(state, action: PayloadAction<number>) {
       state.error.loading = true;
       state.error.error = null;
@@ -49,6 +63,9 @@ export const postSlice = createSlice({
 export const {
   initialize,
   updatePost,
+  writePost,
+  writePostSuccess,
+  writePostFailure,
   readPost,
   readPostSuccess,
   readPostFailure,
