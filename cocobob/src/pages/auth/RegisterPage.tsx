@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { SignUpData } from '../../types/types';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/auth/slices';
+import Spacer from '../../components/common/Spacer';
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -43,10 +44,6 @@ const RegisterPage = () => {
     padding: 3rem 7rem 5rem 7rem;
     text-align: center;
     border-radius: 20px;
-  `;
-
-  const Spacer = styled.div`
-    padding: 2rem;
   `;
 
   const checkPassword = (passwordConfirm: string): boolean => {
@@ -101,9 +98,9 @@ const RegisterPage = () => {
         />
         {/* {error.error?.message !== undefined ? (
           <ErrorMessage>{'회 원 가 입  실 패 !'}</ErrorMessage>
-        ) : (
-          <Spacer />
-        )} */}
+        ) : ( */}
+        <Spacer />
+        {/* )} */}
         <RegisterButton onSubmit={onSubmit} />
       </RegisterBox>
     </RegisterBlock>

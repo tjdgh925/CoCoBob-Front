@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
 `;
 
 const AuthHeaderText = styled.h2`
-  color: ${palette.pink};
+  color: ${palette.main};
   text-decoration: none;
 `;
 

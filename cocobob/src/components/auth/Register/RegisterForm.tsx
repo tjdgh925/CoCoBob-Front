@@ -5,6 +5,7 @@ import DatePicker from '@mui/lab/DatePicker';
 import { SignUpData } from '../../../types/types';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
+import Spacer from '../../common/Spacer';
 
 const RegisterFormBlock = styled.div`
   h3 {
@@ -31,9 +32,6 @@ const StyledInput = styled.input`
   & + & {
     margin-top: 1.5rem;
   }
-`;
-const Spacer = styled.div`
-  padding: 1.5rem;
 `;
 
 const PasswordError = styled.div`

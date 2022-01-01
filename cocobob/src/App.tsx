@@ -13,8 +13,8 @@ function App() {
   return (
     <>
       <HeaderTab />
-        <Route component={HomePage} path="/" exact/>
       <Responsive>
+        <Route component={HomePage} path="/" exact />
         <Route component={PostListPage} path="/post" exact />
         <Route component={LoginPage} path="/login" exact />
         <Route component={RegisterPage} path="/register" exact />
