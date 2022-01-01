@@ -66,7 +66,7 @@ const PostInfo = styled.div`
 `;
 
 const Title = styled.h3`
-  color: ${palette.pink};
+  color: ${palette.main};
 `;
 const Username = styled.h5`
   color: gray;

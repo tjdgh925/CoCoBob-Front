@@ -47,13 +47,13 @@ const StyledLink = styled(Link)`
   &:active {
     text-decoration: none;
   }
-  color: ${palette.pink};
+  color: ${palette.main};
 `;
 
 const LogoImage = styled.img`
-    width: 20px;
-    height: auto;
-    margin: 0 10px;
+  width: 20px;
+  height: auto;
+  margin: 0 10px;
 `;
 
 const HeaderTab = () => {
@@ -75,12 +75,14 @@ const HeaderTab = () => {
           {auth ? (
             <div className="right">
               <UserInfo>{data && data.email}</UserInfo>
-              <Button color={palette.pink} onClick={onLogout}>로그아웃</Button>
+              <Button color={palette.main} onClick={onLogout}>
+                로그아웃
+              </Button>
             </div>
           ) : (
             <div className="right">
               <Link to="/login">
-                <Button color={palette.pink}>로그인</Button>
+                <Button color={palette.main}>로그인</Button>
               </Link>
             </div>
           )}
