@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import palette from '../../lib/styles/palette';
 type onSubmit = (e: React.MouseEvent<HTMLButtonElement>) => void;
 type onClick = () => void;
 
@@ -29,7 +30,7 @@ const buttonStyle = css<{
   color: white;
   outline: none;
   cursor: pointer;
-  background: gray;
+  background: ${palette.gray[0]};
   &:hover {
     background: black;
   }

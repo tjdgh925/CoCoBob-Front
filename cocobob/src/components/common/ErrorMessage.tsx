@@ -1,5 +1,6 @@
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import palette from '../../lib/styles/palette';
 import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -7,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) =>
     errorMsg: {
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
-      color: 'red',
+      color: palette.error,
       textAlign: 'center',
     },
   })

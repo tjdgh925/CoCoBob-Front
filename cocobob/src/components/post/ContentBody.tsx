@@ -10,7 +10,6 @@ const ContentBodyBlock = styled.div`
 const Title = styled.h1`
   border: none;
   padding-bottom: 1rem;
-  // border-bottom: 2px solid black;
   width: 60%;
 `;
 

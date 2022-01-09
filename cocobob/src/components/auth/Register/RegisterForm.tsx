@@ -22,8 +22,8 @@ const StyledInput = styled.input`
   width: 90%;
   padding: 1rem;
 
-  line &:focus {
-    color: $oc-teal-7;
+  :focus {
+    color: ${palette.gray[1]};
     border-bottom: 1px solid blue;
   }
   :placeholder {
@@ -36,7 +36,7 @@ const StyledInput = styled.input`
 
 const PasswordError = styled.div`
   h4 {
-    color: red;
+    color: ${palette.error};
   }
 `;
 
