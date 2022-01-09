@@ -69,7 +69,7 @@ const Title = styled.h3`
   color: ${palette.main};
 `;
 const Username = styled.h5`
-  color: gray;
+  color: ${palette.gray[2]};
 `;
 
 const WriteButton = styled.button`
