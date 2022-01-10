@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CommentList from './CommentList';
 import CommentWrite from './CommentWrite';
 import ContentBody from './ContentBody';
 import ContentSideView from './ContentSideView';
@@ -6,16 +7,17 @@ import ContentSideView from './ContentSideView';
 const PostContentBlock = styled.div`
   flex-direction: column;
   display: flex;
-  height: 1000px;
 `;
 const ContentBlock = styled.div`
   width: 100%;
   display: flex;
-  height: 80%;
+  height: 60vh;
 `;
 const CommentBlock = styled.div`
   width: 100%;
   display: flex;
+  margin-bottom: 3rem;
+  flex-direction: column;
 `;
 
 const PostViewer = () => {
@@ -27,6 +29,7 @@ const PostViewer = () => {
       </ContentBlock>
       <CommentBlock>
         <CommentWrite />
+        <CommentList />
       </CommentBlock>
     </PostContentBlock>
   );
