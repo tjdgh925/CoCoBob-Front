@@ -60,3 +60,8 @@ export interface PostListState {
   data: PostListData | null;
   success: PostSuccessData[] | null;
 }
+
+export interface Comment {
+  content: string;
+  username: string;
+}
