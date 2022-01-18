@@ -74,7 +74,7 @@ const HeaderTab = () => {
           </StyledLink>
           {auth ? (
             <div className="right">
-              <UserInfo>{data && data.email}</UserInfo>
+              <UserInfo>{data && data.username}</UserInfo>
               <Button color={palette.main} onClick={onLogout}>
                 로그아웃
               </Button>
