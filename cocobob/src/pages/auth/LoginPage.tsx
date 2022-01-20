@@ -3,6 +3,12 @@ import LoginForm from '../../components/auth/Login/LoginForm';
 import LoginFooter from '../../components/auth/Login/LoginFooter';
 import LoginButtons from '../../components/auth/Login/LoginButtons';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useCallback, useEffect, useState } from 'react';
+import { LoginData } from '../../types/types';
+import { login } from '../../features/auth/slices';
 
 const LoginBlock = styled.div`
   position: absolute;
@@ -28,13 +34,58 @@ const LoginBox = styled.div`
 `;
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  let history = useHistory();
+
+  const LoginPageState = useTypedSelector((state) => state.auth);
+  const error = LoginPageState.error;
+  const auth = LoginPageState.auth;
+  const [loginInfo, setLoginInfo] = useState<LoginData>({
+    username: '',
+    password: '',
+  });
+
+  const onChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setLoginInfo({
+        ...loginInfo,
+        [name]: value,
+      });
+      console.log(loginInfo);
+    },
+    [loginInfo]
+  );
+
+  const onSubmit = () => {
+    console.log(loginInfo);
+    dispatch(login(loginInfo));
+  };
+
+  useEffect(() => {
+    if (auth) {
+      history.push({
+        pathname: '/',
+        state: { username: loginInfo.username },
+      });
+      try {
+        localStorage.setItem('user', JSON.stringify(LoginPageState.data));
+      } catch (e) {
+        console.log('local Storage not working');
+      }
+    }
+    if (error !== null) {
+      console.log(error);
+      return;
+    }
+  }, [auth, error, history, LoginPageState, loginInfo.username]);
   return (
     <LoginBlock>
       <LoginBox>
         <AuthHeader />
-        <LoginForm />
+        <LoginForm onChange={onChange} loginData={loginInfo} />
         <LoginFooter />
-        <LoginButtons />
+        <LoginButtons onSubmit={onSubmit} />
       </LoginBox>
     </LoginBlock>
   );

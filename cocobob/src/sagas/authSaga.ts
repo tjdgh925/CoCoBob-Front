@@ -1,6 +1,13 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
-import * as authAPI from '../lib/api/auth';
-import { signUp, signUpSuccess, signUpFailure } from '../features/auth/slices';
+import * as authAPI from '../api/auth';
+import {
+  signUp,
+  signUpSuccess,
+  signUpFailure,
+  login,
+  loginSuccess,
+  loginFailure,
+} from '../features/auth/slices';
 
 function* signUpSaga(action: ReturnType<typeof signUp>) {
   try {
@@ -11,6 +18,16 @@ function* signUpSaga(action: ReturnType<typeof signUp>) {
   }
 }
 
+function* loginSaga(action: ReturnType<typeof login>) {
+  try {
+    yield call(authAPI.login, action.payload);
+    yield put(loginSuccess(true));
+  } catch (e: any) {
+    yield put(loginFailure(e));
+  }
+}
+
 export function* authSaga() {
   yield takeLatest(signUp, signUpSaga);
+  yield takeLatest(login, loginSaga);
 }
