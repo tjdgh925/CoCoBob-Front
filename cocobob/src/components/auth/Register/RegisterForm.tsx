@@ -90,15 +90,15 @@ const RegisterForm = ({
       <form id="register" autoComplete="off">
         <StyledInput
           placeholder="이메일 입력"
-          name="email"
-          value={signUpInfo.email}
+          name="username"
+          value={signUpInfo.username}
           onChange={onChange}
         />
         <Spacer />
         <StyledInput
           placeholder="비밀번호 입력"
           name="password"
-          value={signUpInfo.user_pw}
+          value={signUpInfo.password}
           onChange={onChange}
           type="password"
         />

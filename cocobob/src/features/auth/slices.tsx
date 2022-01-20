@@ -33,25 +33,21 @@ export const authSlice = createSlice({
       state.error.error = action.payload;
       state.auth = false;
     },
-    register(state, action: PayloadAction<SignUpData>) {
+    signUp(state, action: PayloadAction<SignUpData>) {
       state.error.loading = true;
       state.error.error = null;
       state.auth = null;
       state.data = action.payload;
     },
-    registerSuccess(state, action: PayloadAction<boolean>) {
+    signUpSuccess(state, action: PayloadAction<boolean>) {
       state.error.loading = false;
       state.error.error = null;
       state.auth = action.payload;
     },
-    registerFailure(state, action: PayloadAction<AxiosError>) {
+    signUpFailure(state, action: PayloadAction<AxiosError>) {
       state.error.loading = false;
       state.error.error = action.payload;
       state.auth = false;
-    },
-    tempSetUser(state, action: PayloadAction<LoginData>) {
-      state.error.loading = true;
-      state.data = action.payload;
     },
     check(state) {
       state.error.loading = true;
@@ -76,10 +72,9 @@ export const {
   login,
   loginSuccess,
   loginFailure,
-  register,
-  registerSuccess,
-  registerFailure,
-  tempSetUser,
+  signUp,
+  signUpSuccess,
+  signUpFailure,
   check,
   checkSuccess,
   checkFailure,

@@ -6,10 +6,16 @@ import Spacer from '../../common/Spacer';
 
 const ButtonsBlock = styled.div``;
 
-const LoginButtons = () => {
+interface LoginButtonsProps {
+  onSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
+const LoginButtons = ({ onSubmit }: LoginButtonsProps) => {
   return (
     <ButtonsBlock>
-      <Button color={palette.main}>로그인</Button>
+      <Button color={palette.main} onClick={onSubmit}>
+        로그인
+      </Button>
       <Spacer size={0.5} />
       <Link to="/register">
         <Button color={palette.main} opacity="0.6">

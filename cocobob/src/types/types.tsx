@@ -1,13 +1,13 @@
 export interface LoginData {
-  email: string;
-  user_pw: string;
+  username: string;
+  password: string;
 }
 
 export interface SignUpData {
-  email: string;
-  user_pw: string;
-  sex: string;
-  birth: string;
+  username: string;
+  password: string;
+  // sex: string;
+  // birth: string;
 }
 
 export interface ErrorData {

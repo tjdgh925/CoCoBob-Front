@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import ErrorMessage from '../../common/ErrorMessage';
 import palette from '../../../lib/styles/palette';
+import { LoginData } from '../../../types/types';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
 const LoginFormBlock = styled.div`
   padding-bottom: 1rem;
@@ -31,21 +33,36 @@ const StyledInput = styled.input`
   }
 `;
 
-const LoginForm = () => {
+interface LoginFormProps {
+  onChange: (e: any) => void;
+  loginData: LoginData;
+}
+
+const LoginForm = ({ onChange, loginData }: LoginFormProps) => {
+  const LoginPageState = useTypedSelector((state) => state.auth);
+  const error = LoginPageState.error;
+
   return (
     <LoginFormBlock>
       <h3>Login</h3>
       <form id="login" autoComplete="off">
-        <StyledInput name="username" placeholder={'아이디를 입력해주세요.'} />
+        <StyledInput
+          name="username"
+          value={loginData.username}
+          onChange={onChange}
+          placeholder={'아이디를 입력해주세요.'}
+        />
         <StyledInput
           name="password"
+          value={loginData.password}
+          onChange={onChange}
           type="password"
           placeholder={'비밀번호를 입력해주세요.'}
         />
       </form>
-      {/* {error.error?.message !== undefined && (
+      {error.error?.message !== undefined && (
         <ErrorMessage>{'로 그 인 실 패 !'}</ErrorMessage>
-      )} */}
+      )}
     </LoginFormBlock>
   );
 };
