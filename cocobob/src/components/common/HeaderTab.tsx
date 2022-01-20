@@ -28,6 +28,12 @@ const Wrapper = styled(Responsive)`
     font-weight: 800;
     letter-spacing: 2px;
   }
+  .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${palette.gray[0]};
+  }
 `;
 
 const Spacer = styled.div`
@@ -58,11 +64,13 @@ const LogoImage = styled.img`
 
 const HeaderTab = () => {
   const LoginPageState = useTypedSelector((state) => state.auth);
-  const data = LoginPageState.data;
+  const data = localStorage.getItem('username');
   const auth = LoginPageState.auth;
   const dispatch = useDispatch();
   const onLogout = () => {
     dispatch(logout());
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
   };
   return (
     <>
@@ -74,7 +82,7 @@ const HeaderTab = () => {
           </StyledLink>
           {auth ? (
             <div className="right">
-              <UserInfo>{data && data.username}</UserInfo>
+              <UserInfo>{data}</UserInfo>
               <Button color={palette.main} onClick={onLogout}>
                 로그아웃
               </Button>
