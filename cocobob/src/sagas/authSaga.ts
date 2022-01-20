@@ -7,6 +7,9 @@ import {
   login,
   loginSuccess,
   loginFailure,
+  checkSuccess,
+  checkFailure,
+  check,
 } from '../features/auth/slices';
 
 function* signUpSaga(action: ReturnType<typeof signUp>) {
@@ -27,7 +30,19 @@ function* loginSaga(action: ReturnType<typeof login>) {
   }
 }
 
+function* checkSaga() {
+  try {
+    const response: string = yield call(authAPI.check);
+    yield put(checkSuccess(true));
+    localStorage.setItem('username', response);
+  } catch (e: any) {
+    yield put(checkFailure(e));
+    localStorage.removeItem('username');
+  }
+}
+
 export function* authSaga() {
   yield takeLatest(signUp, signUpSaga);
   yield takeLatest(login, loginSaga);
+  yield takeLatest(check, checkSaga);
 }

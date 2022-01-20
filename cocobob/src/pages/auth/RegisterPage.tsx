@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { SignUpData } from '../../types/types';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../../features/auth/slices';
+import { check, signUp } from '../../features/auth/slices';
 import Spacer from '../../components/common/Spacer';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import ErrorMessage from '../../components/common/ErrorMessage';
@@ -19,7 +19,6 @@ const RegisterBlock = styled.div`
   top: 8%;
   bottom: 0;
   right: 0;
-  // background: #e3e3e3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,10 +69,10 @@ const RegisterPage = () => {
 
   useEffect(() => {
     if (auth) {
-      console.log('성공');
       history.push('/');
       try {
-        localStorage.setItem('user', JSON.stringify(SignUpPageState.data));
+        dispatch(check());
+        localStorage.setItem('username', signUpInfo.username);
       } catch (e) {
         console.log('local Storage not working');
       }
@@ -82,7 +81,7 @@ const RegisterPage = () => {
       console.log(error);
       return;
     }
-  }, [auth, error, history, SignUpPageState]);
+  }, [auth, error, history, SignUpPageState, dispatch, signUpInfo.username]);
 
   const onSubmit = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -94,7 +93,6 @@ const RegisterPage = () => {
 
   const onChange = useCallback(
     (e) => {
-      console.log(e.target);
       const { name, value } = e.target;
       if (name === 'passwordConfirm') {
         setPasswordConfirm(value);

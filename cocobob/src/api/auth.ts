@@ -14,3 +14,17 @@ export async function signUp({ username, password }: SignUpData) {
     if (response.data.token) localStorage.setItem('token', response.data.token);
   });
 }
+
+// 로그인 유지를 위해서 토큰 검증
+export async function check() {
+  const response = await cocobob
+    .get('/api/getUsername', {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+  return response;
+}

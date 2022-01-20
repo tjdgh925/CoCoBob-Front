@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useCallback, useEffect, useState } from 'react';
 import { LoginData } from '../../types/types';
-import { login } from '../../features/auth/slices';
+import { check, login } from '../../features/auth/slices';
 
 const LoginBlock = styled.div`
   position: absolute;
@@ -16,7 +16,6 @@ const LoginBlock = styled.div`
   top: 8%;
   bottom: 0;
   right: 0;
-  // background: #e3e3e3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,13 +51,11 @@ const LoginPage = () => {
         ...loginInfo,
         [name]: value,
       });
-      console.log(loginInfo);
     },
     [loginInfo]
   );
 
   const onSubmit = () => {
-    console.log(loginInfo);
     dispatch(login(loginInfo));
   };
 
@@ -69,7 +66,8 @@ const LoginPage = () => {
         state: { username: loginInfo.username },
       });
       try {
-        localStorage.setItem('user', JSON.stringify(LoginPageState.data));
+        dispatch(check());
+        localStorage.setItem('username', loginInfo.username);
       } catch (e) {
         console.log('local Storage not working');
       }
@@ -78,7 +76,7 @@ const LoginPage = () => {
       console.log(error);
       return;
     }
-  }, [auth, error, history, LoginPageState, loginInfo.username]);
+  }, [auth, error, history, LoginPageState, loginInfo.username, dispatch]);
   return (
     <LoginBlock>
       <LoginBox>

@@ -49,10 +49,6 @@ export const authSlice = createSlice({
       state.error.error = action.payload;
       state.auth = false;
     },
-    tempSetUser(state, action: PayloadAction<LoginData>) {
-      state.error.loading = true;
-      state.data = action.payload;
-    },
     check(state) {
       state.error.loading = true;
     },
@@ -79,7 +75,6 @@ export const {
   signUp,
   signUpSuccess,
   signUpFailure,
-  tempSetUser,
   check,
   checkSuccess,
   checkFailure,
