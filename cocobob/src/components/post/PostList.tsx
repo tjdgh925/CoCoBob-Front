@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
   }
   color: black;
 `;
-const Test = styled.div`
+const PostGridBlock = styled.div`
   padding-top: 2rem;
   padding-bottom: 2rem;
   display: grid;
@@ -105,21 +105,20 @@ const PostList = ({ posts, loading, error }: PostListProps) => {
   }
   return (
     <PostListBlock>
-      {/* {((user)&& (
+      {user && (
         <Link to="write">
           <WriteButton>새 글 작성하기</WriteButton>
         </Link>
-      )} */}
+      )}
 
       {posts && (
-        <Test>
-          {() => console.log(posts)}
+        <PostGridBlock>
           {posts.map((post) => (
             <StyledLink to={`/post/${post.id}`}>
               <PostItem post={post} key={post.id} />
             </StyledLink>
           ))}
-        </Test>
+        </PostGridBlock>
       )}
     </PostListBlock>
   );

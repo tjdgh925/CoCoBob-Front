@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
+import { PostSuccessData } from '../../types/types';
 import CommentList from './CommentList';
 import CommentWrite from './CommentWrite';
 import ContentBody from './ContentBody';
@@ -11,7 +13,8 @@ const PostContentBlock = styled.div`
 const ContentBlock = styled.div`
   width: 100%;
   display: flex;
-  height: 60vh;
+  min-height: 60vh;
+  margin-bottom: 2rem;
 `;
 const CommentBlock = styled.div`
   width: 100%;
@@ -20,11 +23,18 @@ const CommentBlock = styled.div`
   flex-direction: column;
 `;
 
-const PostViewer = () => {
+interface PostViewerProps {
+  post: PostSuccessData | null;
+}
+
+const PostViewer = ({ post }: PostViewerProps) => {
+  useEffect(() => {
+    console.log(post);
+  });
   return (
     <PostContentBlock>
       <ContentBlock>
-        <ContentBody />
+        {post && <ContentBody post={post} />}
         <ContentSideView />
       </ContentBlock>
       <CommentBlock>

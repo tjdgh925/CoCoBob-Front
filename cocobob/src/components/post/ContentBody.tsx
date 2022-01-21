@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PostSuccessData } from '../../types/types';
 import ContentInfo from '../common/ContentInfo';
 
 const ContentBodyBlock = styled.div`
@@ -15,8 +16,9 @@ const Title = styled.h1`
 
 const Separator = styled.div`
   align-self: center;
-  width: 95%;
+  width: 100%;
   padding-top: 3rem;
+  padding-right: 1rem;
   border-bottom: 2px solid #aaadab;
 `;
 
@@ -26,16 +28,19 @@ const Body = styled.div`
   padding-top: 3rem;
 `;
 
-const ContentBody = () => {
+interface ContentBodyProps {
+  post: PostSuccessData;
+}
+
+const ContentBody = ({ post }: ContentBodyProps) => {
   return (
     <ContentBodyBlock>
-      <Title>제목</Title>
-      <ContentInfo username="사용자" deadline="마감일" tag={['tag1', 'tag2']} />
+      <Title>{post?.title}</Title>
+      <ContentInfo username={post.username} tag={post.tag} />
       <Separator />
       <Body
         dangerouslySetInnerHTML={{
-          __html:
-            '<div>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsu will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</div>',
+          __html: `${post?.contents.toString()}`,
         }}
       />
     </ContentBodyBlock>

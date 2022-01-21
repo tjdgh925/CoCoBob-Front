@@ -18,12 +18,12 @@ const ContentInfoItem = styled.div`
 `;
 
 interface ContentInfoProp {
-  username: string;
-  deadline: string;
-  tag: string[];
+  username: string | null;
+  tag: string | null;
 }
 
-const ContentInfo = ({ username, deadline, tag }: ContentInfoProp) => {
+const ContentInfo = ({ username, tag }: ContentInfoProp) => {
+  const tags: string[] | undefined = tag?.split(',');
   return (
     <ContentInfoBlock>
       <ContentInfoItem>
@@ -32,11 +32,11 @@ const ContentInfo = ({ username, deadline, tag }: ContentInfoProp) => {
       </ContentInfoItem>
       <ContentInfoItem>
         <h3>마감일</h3>
-        {deadline}
+        deadline
       </ContentInfoItem>
       <ContentInfoItem>
         <h3>태그</h3>
-        <Tags tags={tag} />
+        <Tags tags={tags} />
       </ContentInfoItem>
     </ContentInfoBlock>
   );
