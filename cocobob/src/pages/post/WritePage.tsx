@@ -3,9 +3,11 @@ import WriteActionButtons from '../../components/write/WriteActionButtons';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostInputData } from '../../types/types';
+import { PostInputData, PostSuccessData } from '../../types/types';
 import { useCallback } from 'react';
 import { updatePost, writePost } from '../../features/post/slices';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const WritePageBlock = styled.div`
   height: 100%;
@@ -16,8 +18,12 @@ const WritePageBlock = styled.div`
 
 const WritePage = () => {
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const postState: PostInputData = useTypedSelector((state) => state.post.data);
+  const success: PostSuccessData | null = useTypedSelector(
+    (state) => state.post.success
+  );
   const title = postState.title;
   const contents = postState.contents;
   const tag = postState.tag;
@@ -59,6 +65,9 @@ const WritePage = () => {
       })
     );
   };
+  useEffect(() => {
+    if (success) history.push(`post/${success.id}`);
+  }, [history, success]);
 
   return (
     <WritePageBlock>
