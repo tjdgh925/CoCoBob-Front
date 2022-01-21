@@ -1,8 +1,6 @@
-import { useRef, useMemo, useCallback, useEffect, useState } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostInputData } from '../../types/types';
-import { initialize, updatePost } from '../../features/post/slices';
+import { initialize } from '../../features/post/slices';
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -76,30 +74,32 @@ const Select = styled.select`
   }
 `;
 
-const Editor = () => {
+interface EditorProps {
+  changeTitle: (e: any) => void;
+  changeBody: (e: any) => void;
+  title: string;
+  contents: string;
+}
+
+const Editor = ({ changeTitle, changeBody, title, contents }: EditorProps) => {
   const dispatch = useDispatch();
   const QuillRef = useRef<ReactQuill>();
 
-  const postState: PostInputData = useTypedSelector((state) => state.post.data);
-  const title = postState.title;
-  const contents = postState.contents;
-  const tag = postState.tag;
+  // const [deadline, setDeadline] = useState<string>('00:00');
+  // const [time, setTime] = useState<string>('');
+  // const [minute, setMinute] = useState<string>('');
 
-  const [deadline, setDeadline] = useState<string>('00:00');
-  const [time, setTime] = useState<string>('');
-  const [minute, setMinute] = useState<string>('');
+  // const handleChange = useCallback((e) => {
+  //   console.log(e.target);
+  //   const { name, value } = e.target;
+  //   if (name === 'time') setTime(value);
+  //   else if (name === 'minute') setMinute(value);z
+  // }, []);
 
-  const handleChange = useCallback((e) => {
-    console.log(e.target);
-    const { name, value } = e.target;
-    if (name === 'time') setTime(value);
-    else if (name === 'minute') setMinute(value);
-  }, []);
-
-  useEffect(() => {
-    setDeadline(time + ':' + minute);
-    console.log(deadline);
-  }, [deadline, minute, time]);
+  // useEffect(() => {
+  //   setDeadline(time + ':' + minute);
+  //   console.log(deadline);
+  // }, [deadline, minute, time]);
 
   const modules = useMemo(
     () => ({
@@ -121,35 +121,6 @@ const Editor = () => {
     };
   }, [dispatch]);
 
-  const changeTitle = useCallback(
-    (e) => {
-      const { value } = e.target;
-      dispatch(
-        updatePost({
-          title: value,
-          contents: contents,
-          deadline: deadline,
-          tag: tag,
-        })
-      );
-    },
-    [dispatch, contents, deadline, tag]
-  );
-
-  const changeBody = useCallback(
-    (e) => {
-      dispatch(
-        updatePost({
-          title: title,
-          contents: e,
-          deadline: deadline,
-          tag: tag,
-        })
-      );
-    },
-    [dispatch, title, deadline, tag]
-  );
-
   return (
     <EditorBlock>
       <TitleInput
@@ -158,7 +129,7 @@ const Editor = () => {
         value={title}
         onChange={changeTitle}
       />
-      <DeadLineBlock>
+      {/* <DeadLineBlock>
         <h2>마감 시간: </h2>
         <Select name="time" value={time} onChange={handleChange}>
           <option value="" hidden>
@@ -201,7 +172,7 @@ const Editor = () => {
           <option value="40">40</option>
           <option value="50">50</option>
         </Select>
-      </DeadLineBlock>
+      </DeadLineBlock> */}
       <ReactQuill
         ref={(element) => {
           if (element !== null) {

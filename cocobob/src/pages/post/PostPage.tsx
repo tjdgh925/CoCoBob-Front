@@ -1,6 +1,12 @@
+import { title } from 'process';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PostViewer from '../../components/post/PostViewer';
+import { readPost, unloadPost } from '../../features/post/slices';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { PostState, PostSuccessData } from '../../types/types';
 
 interface MatchParams {
   postId: string;
@@ -14,11 +20,24 @@ const PostPageBlock = styled.div`
 `;
 
 const PostPage = ({ match }: RouteComponentProps<MatchParams>) => {
+  const dispatch = useDispatch();
+  const postState: PostState = useTypedSelector((state) => state.post);
+
+  const post = postState.success;
+  const error = postState.error.error;
+  const loading = postState.error.loading;
+
   const { postId } = match.params;
+  useEffect(() => {
+    dispatch(readPost(parseInt(postId)));
+    return () => {
+      dispatch(unloadPost());
+    };
+  }, [dispatch, postId]);
 
   return (
     <PostPageBlock>
-      <PostViewer />
+      <PostViewer post={post} />
     </PostPageBlock>
   );
 };

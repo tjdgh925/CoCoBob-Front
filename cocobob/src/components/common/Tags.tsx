@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface TagsProps {
-  tags: string[];
+  tags: string[] | undefined;
 }
 const TagBlock = styled.div`
   display: flex;
@@ -13,9 +13,10 @@ const TagBlock = styled.div`
 const Tags = ({ tags }: TagsProps) => {
   return (
     <TagBlock>
-      {tags.map((tag) => {
-        return <span key={tag}>#{tag}&nbsp;&nbsp;</span>;
-      })}
+      {tags &&
+        tags.map((tag) => {
+          if (tag !== '') return <span key={tag}>#{tag}&nbsp;&nbsp;</span>;
+        })}
     </TagBlock>
   );
 };

@@ -32,7 +32,7 @@ const StyledLink = styled(Link)`
   }
   color: black;
 `;
-const Test = styled.div`
+const PostGridBlock = styled.div`
   padding-top: 2rem;
   padding-bottom: 2rem;
   display: grid;
@@ -99,28 +99,26 @@ const PostItem = ({ post }: PostItemProps) => {
 };
 
 const PostList = ({ posts, loading, error }: PostListProps) => {
+  const user = localStorage.getItem('username');
   if (error) {
     return <ErrorMessage>에러가 발생!!</ErrorMessage>;
   }
   return (
     <PostListBlock>
-      {/* {showWriteButtons && ( */}
+      {user && (
+        <Link to="write">
+          <WriteButton>새 글 작성하기</WriteButton>
+        </Link>
+      )}
 
-      {/* <Link to="write">
-        <WriteButton>새 글 작성하기</WriteButton>
-      </Link> */}
-
-      {/* )} */}
-
-      {!loading && posts && (
-        <Test>
-          {() => console.log(posts)}
+      {posts && (
+        <PostGridBlock>
           {posts.map((post) => (
             <StyledLink to={`/post/${post.id}`}>
               <PostItem post={post} key={post.id} />
             </StyledLink>
           ))}
-        </Test>
+        </PostGridBlock>
       )}
     </PostListBlock>
   );
