@@ -44,10 +44,10 @@ const TagBox = () => {
   const postState: PostInputData = useTypedSelector((state) => state.post.data);
   const title = postState.title;
   const contents = postState.contents;
-  const tags = postState.tag.split(', ');
-  const deadline = postState.deadline;
+  const tags: string[] | null = postState.tag.split(',');
+  // const deadline = postState.deadline;
   Object.preventExtensions(postState);
-  const [tag, setTag] = useState<string>('');
+  const [tag, setTag] = useState<string | null>(null);
 
   useEffect(() => {
     return () => {
@@ -62,21 +62,20 @@ const TagBox = () => {
 
   const onClick = useCallback(
     (e) => {
-      if (tag === '') return;
+      if (!tag) return;
       if (tags.includes(tag)) return;
       const temp: string[] = [...tags, tag];
-      console.log(temp);
       dispatch(
         updatePost({
           title: title,
           contents: contents,
           tag: temp.toString(),
-          deadline: deadline,
+          // deadline: deadline,
         })
       );
       setTag('');
     },
-    [tag, tags, dispatch, title, contents, deadline]
+    [tag, tags, dispatch, title, contents]
   );
 
   const onRemove = useCallback(
@@ -89,11 +88,11 @@ const TagBox = () => {
           title: title,
           contents: contents,
           tag: temp.toString(),
-          deadline: deadline,
+          // deadline: deadline,
         })
       );
     },
-    [tags, dispatch, title, contents, deadline]
+    [tags, dispatch, title, contents]
   );
 
   return (
@@ -114,13 +113,19 @@ const TagBox = () => {
         </Button>
       </Box>
       <Box className={classes.tagsContainer}>
-        {tags.map((tag) => {
-          return (
-            <Typography className={classes.tags} onClick={onRemove} key={tag}>
-              #{tag}
-            </Typography>
-          );
-        })}
+        {tags &&
+          tags.map((tag) => {
+            if (tag !== '')
+              return (
+                <Typography
+                  className={classes.tags}
+                  onClick={onRemove}
+                  key={tag}
+                >
+                  #{tag}
+                </Typography>
+              );
+          })}
       </Box>
     </Box>
   );

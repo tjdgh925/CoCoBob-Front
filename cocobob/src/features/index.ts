@@ -4,8 +4,10 @@ import { all } from 'redux-saga/effects';
 import authReducer, { check } from './auth/slices';
 import postReducer from './post/slices';
 import profileReducer from './profile/slices';
-import postsListReducer from './postList/slices';
+import postsListReducer from './postsList/slices';
 import { authSaga } from '../sagas/authSaga';
+import { postsListSaga } from '../sagas/postListSaga';
+import { postSaga } from '../sagas/postSaga';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -15,7 +17,7 @@ const rootReducer = combineReducers({
 });
 
 function* rootSaga() {
-  yield all([authSaga()]);
+  yield all([authSaga(), postsListSaga(), postSaga()]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

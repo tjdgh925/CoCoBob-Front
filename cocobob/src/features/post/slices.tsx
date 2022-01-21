@@ -6,7 +6,7 @@ const initialData: PostInputData = {
   title: '',
   contents: '',
   tag: '',
-  deadline: '',
+  // deadline: '',
 };
 const initialState: PostState = {
   error: {

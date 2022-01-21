@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import {
-  PostListState,
-  PostListData,
-  PostSuccessData,
-} from '../../types/types';
+import { PostListState, PostSuccessData } from '../../types/types';
 
 const initialState: PostListState = {
   error: {

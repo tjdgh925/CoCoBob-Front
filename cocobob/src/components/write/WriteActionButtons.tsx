@@ -1,16 +1,8 @@
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostState } from '../../types/types';
-import { writePost } from '../../features/post/slices';
-
 import Button from '../../components/common/Button';
-
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 import styled from 'styled-components';
+import palette from '../../lib/styles/palette';
 
 const ButtonBlock = styled.div`
   width: 90%;
@@ -22,68 +14,27 @@ const ButtonBlock = styled.div`
   }
 `;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      height: 100,
-      paddingTop: theme.spacing(3),
-    },
-    button: {
-      height: '3rem',
-      marginLeft: theme.spacing(1),
-    },
-  })
-);
+interface WriteActionButtonsProps {
+  onPublish: (e: any) => void;
+}
 
-const WriteActionButtons = () => {
+const WriteActionButtons = ({ onPublish }: WriteActionButtonsProps) => {
   let history = useHistory();
-  const dispatch = useDispatch();
-  const postState: PostState = useTypedSelector((state) => state.post);
-  let post = postState.success;
-  const title = postState.data.title;
-  const contents = postState.data.contents;
-  const tag = postState.data.tag;
-  const error = postState.error;
-
-  async function onPublish() {
-    var user = JSON.parse(localStorage.getItem('user') || '');
-    console.log(user.username);
-    const response = await axios.post('/api/boards', {
-      title: title,
-      username: user.username,
-      contents: contents,
-      tag: tag,
-      deadline: 'EX',
-    });
-    console.log(response);
-    dispatch(
-      writePost({
-        title,
-        contents,
-        tag,
-        deadline: 'dd',
-      })
-    );
-  }
 
   const onCancel = () => {
     history.goBack();
   };
 
-  useEffect(() => {
-    if (post !== null) {
-      history.push(`/`);
-    }
-    if (error) {
-      console.log(error);
-    }
-  }, [post, history, error]);
   return (
     <ButtonBlock>
-      <Button onClick={onPublish}>포스트 등록</Button>
-      <Button onClick={onCancel}>포스트 취소</Button>
+      <Button onClick={onPublish} color={palette.main}>
+        포스트 등록
+      </Button>
+      <Button onClick={onCancel} color={palette.gray[2]}>
+        포스트 취소
+      </Button>
     </ButtonBlock>
   );
 };
 
-export default withRouter(WriteActionButtons);
+export default WriteActionButtons;

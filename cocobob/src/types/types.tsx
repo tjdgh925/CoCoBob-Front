@@ -29,9 +29,9 @@ export interface SignUpState {
 
 export interface PostInputData {
   title: string;
-  tag: string;
   contents: string;
-  deadline: string;
+  tag: string;
+  // deadline: string;
 }
 
 export interface PostState {
@@ -44,9 +44,9 @@ export interface PostSuccessData {
   id: number;
   title: string;
   username: string;
-  tag: string;
   contents: string;
-  deadline: string;
+  tag: string;
+  view: any;
 }
 
 export interface PostListData {

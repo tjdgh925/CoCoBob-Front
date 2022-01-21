@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import qs from 'qs';
-import { RouteComponentProps, withRouter, useLocation } from 'react-router-dom';
+import { withRouter, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PostList from '../../components/post/PostList';
-import { PostSuccessData } from '../../types/types';
+import { PostListState, PostSuccessData } from '../../types/types';
+import PostSearchTab from '../../components/post/PostSearchTab';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { postsList } from '../../features/postsList/slices';
 
 interface MatchParams {
   username: string;
@@ -16,39 +19,29 @@ const PostListBlock = styled.div`
   flex-direction: column;
 `;
 
-const testData: PostSuccessData[] = [
-  {
-    contents: 'abc',
-    deadline: '3456',
-    id: 1,
-    tag: '',
-    title: 'Title',
-    username: '이아린',
-  },
-  {
-    id: 2,
-    title: 'Title',
-    username: '이아린',
-    contents: 'abc',
-    tag: '',
-    deadline: '3456',
-  },
-];
-const PostListPage = ({ match }: RouteComponentProps<MatchParams>) => {
+const PostListPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { tag, page } = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
+  const postListState: PostListState = useTypedSelector(
+    (state) => state.postsList
+  );
+
+  const posts = postListState.success;
+  const error = postListState.error.error;
+  const loading = postListState.error.loading;
 
   useEffect(() => {
-    // dispatch(postsList());
+    const { page } = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    dispatch(postsList());
   }, [dispatch, location.search]);
 
   return (
     <PostListBlock>
-      <PostList loading={false} error={null} posts={testData} />
+      <PostSearchTab />
+      <PostList loading={loading} error={error} posts={posts} />
     </PostListBlock>
   );
 };
