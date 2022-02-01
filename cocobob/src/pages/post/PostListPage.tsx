@@ -4,10 +4,11 @@ import qs from 'qs';
 import { withRouter, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PostList from '../../components/post/PostList';
-import { PostListState, PostSuccessData } from '../../types/types';
+import { PostListState } from '../../types/types';
 import PostSearchTab from '../../components/post/PostSearchTab';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { postsList } from '../../features/postsList/slices';
+import Pagination from '../../components/post/Pagination';
 
 interface MatchParams {
   username: string;
@@ -35,13 +36,14 @@ const PostListPage = () => {
     const { page } = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    dispatch(postsList());
+    dispatch(postsList(page));
   }, [dispatch, location.search]);
 
   return (
     <PostListBlock>
       <PostSearchTab />
       <PostList loading={loading} error={error} posts={posts} />
+      <Pagination />
     </PostListBlock>
   );
 };

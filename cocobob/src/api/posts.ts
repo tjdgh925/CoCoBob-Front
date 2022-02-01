@@ -32,11 +32,9 @@ export async function readPost(id: number) {
   return response;
 }
 
-export async function postsList() {
-  // const queryString = qs.stringify(page);
-  // console.log(queryString);
+export async function postsList(page: any) {
   const response = await cocobob
-    .get(`/api/boards`, {
+    .get(`/api/boards?page=${page}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
