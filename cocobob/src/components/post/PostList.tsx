@@ -84,8 +84,12 @@ const WriteButton = styled.button`
   justify-self: end;
 `;
 
+const PostFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const PostItem = ({ post }: PostItemProps) => {
-  const { title, username, tag } = post;
+  const { title, username, tag, view } = post;
   return (
     <PostItemBlock>
       <Image src={image} alt="Image" />
@@ -93,7 +97,10 @@ const PostItem = ({ post }: PostItemProps) => {
         <Title>{title}</Title>
         <Username> {username}</Username>
       </PostInfo>
-      <Tags tags={tag.split(', ')} />
+      <PostFooter>
+        <Tags tags={tag.split(', ')} />
+        <span>{view}</span>
+      </PostFooter>
     </PostItemBlock>
   );
 };

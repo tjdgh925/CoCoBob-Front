@@ -35,7 +35,7 @@ const PostViewer = ({ post }: PostViewerProps) => {
     <PostContentBlock>
       <ContentBlock>
         {post && <ContentBody post={post} />}
-        <ContentSideView />
+        {/* <ContentSideView /> */}
       </ContentBlock>
       <CommentBlock>
         <CommentWrite />

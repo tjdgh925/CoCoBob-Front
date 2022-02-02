@@ -20,9 +20,10 @@ const ContentInfoItem = styled.div`
 interface ContentInfoProp {
   username: string | null;
   tag: string | null;
+  views: string | null;
 }
 
-const ContentInfo = ({ username, tag }: ContentInfoProp) => {
+const ContentInfo = ({ username, tag, views }: ContentInfoProp) => {
   const tags: string[] | undefined = tag?.split(',');
   return (
     <ContentInfoBlock>
@@ -30,13 +31,17 @@ const ContentInfo = ({ username, tag }: ContentInfoProp) => {
         <h3>작성자</h3>
         <span>{username}</span>
       </ContentInfoItem>
-      <ContentInfoItem>
+      {/* <ContentInfoItem>
         <h3>마감일</h3>
         deadline
-      </ContentInfoItem>
+      </ContentInfoItem> */}
       <ContentInfoItem>
         <h3>태그</h3>
         <Tags tags={tags} />
+      </ContentInfoItem>
+      <ContentInfoItem>
+        <h3>조회 수 </h3>
+        <span>{views}</span>
       </ContentInfoItem>
     </ContentInfoBlock>
   );

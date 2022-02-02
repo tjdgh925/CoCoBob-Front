@@ -24,8 +24,6 @@ const PostPage = ({ match }: RouteComponentProps<MatchParams>) => {
   const postState: PostState = useTypedSelector((state) => state.post);
 
   const post = postState.success;
-  const error = postState.error.error;
-  const loading = postState.error.loading;
 
   const { postId } = match.params;
   useEffect(() => {

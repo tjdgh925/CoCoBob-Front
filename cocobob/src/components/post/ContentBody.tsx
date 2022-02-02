@@ -36,7 +36,7 @@ const ContentBody = ({ post }: ContentBodyProps) => {
   return (
     <ContentBodyBlock>
       <Title>{post?.title}</Title>
-      <ContentInfo username={post.username} tag={post.tag} />
+      <ContentInfo username={post.username} tag={post.tag} views={post.view} />
       <Separator />
       <Body
         dangerouslySetInnerHTML={{
