@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import icon from '../../image/search.png';
+import { useCallback } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import qs from 'qs';
 
 const SearchTabBlock = styled.div`
   width: 100%;
@@ -32,16 +37,44 @@ const Icon = styled.img`
 `;
 
 const PostSearchTab = () => {
+  const history = useHistory();
+  const params = new URLSearchParams();
+  const location = useLocation();
+
+  const [query, setQuery] = useState<string>('');
+
+  const onChange = useCallback((e: any) => {
+    setQuery(e.target.value);
+  }, []);
+
+  useEffect(() => {
+    if (query) {
+      params.append('keyword', query);
+      params.append('page', '0');
+    } else {
+      const { page } = qs.parse(location.search, {
+        ignoreQueryPrefix: true,
+      });
+      params.append('keyword', '');
+      if (typeof page === 'string') params.append('page', page);
+      else params.append('page', '0');
+    }
+    history.push({ search: params.toString() });
+  }, [history, query, location.search]);
+
   return (
     <SearchTabBlock>
-      {/* <SearchInputBox> */}
-      <SearchInput placeholder="검색어를 입력해주세요." />
+      <SearchInput
+        placeholder="검색어를 입력해주세요."
+        type="text"
+        value={query}
+        onChange={onChange}
+      />
       <SearchButtonBox>
-        <button style={{ border: 'none' }}>
-          <Icon src={icon} />
-        </button>
+        {/* <button style={{ border: 'none' }} onClick={onClick}> */}
+        <Icon src={icon} />
+        {/* </button> */}
       </SearchButtonBox>
-      {/* </SearchInputBox> */}
     </SearchTabBlock>
   );
 };

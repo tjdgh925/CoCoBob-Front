@@ -14,7 +14,7 @@ export const postsListSlice = createSlice({
   name: 'postsList',
   initialState,
   reducers: {
-    postsList(state) {
+    postsList(state, action: PayloadAction<any>) {
       state.error.loading = true;
       state.error.error = null;
     },
