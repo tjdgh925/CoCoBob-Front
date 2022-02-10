@@ -1,4 +1,7 @@
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { deletePost } from '../../features/post/slices';
 import { PostSuccessData } from '../../types/types';
 import ContentInfo from '../common/ContentInfo';
 
@@ -8,10 +11,21 @@ const ContentBodyBlock = styled.div`
   flex-direction: column;
 `;
 
+const TitleBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Title = styled.h1`
   border: none;
   padding-bottom: 1rem;
   width: 60%;
+`;
+
+const ButtonBlock = styled.div`
+  display: flex;
+  height: 50%;
 `;
 
 const Separator = styled.div`
@@ -33,10 +47,35 @@ interface ContentBodyProps {
 }
 
 const ContentBody = ({ post }: ContentBodyProps) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const onDelete = () => {
+    post.id && dispatch(deletePost(post.id));
+    history.push('/post?page=0');
+  };
+
   return (
     <ContentBodyBlock>
-      <Title>{post?.title}</Title>
-      <ContentInfo username={post.username} tag={post.tag} views={post.view} />
+      <TitleBlock>
+        <Title>{post?.title}</Title>
+        {post.username === localStorage.getItem('username') ? (
+          <ButtonBlock>
+            <Link to={`/post/update/${post.id}`}>
+              <button>수정</button>
+            </Link>
+            <button onClick={onDelete}>삭제</button>
+          </ButtonBlock>
+        ) : (
+          <></>
+        )}
+      </TitleBlock>
+      <ContentInfo
+        username={post.username}
+        tag={post.tag}
+        views={post.view}
+        id={post.id}
+        title={post.title}
+      />
       <Separator />
       <Body
         dangerouslySetInnerHTML={{

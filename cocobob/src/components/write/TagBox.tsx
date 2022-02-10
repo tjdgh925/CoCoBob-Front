@@ -4,49 +4,39 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { PostInputData } from '../../types/types';
 import { initialize, updatePost } from '../../features/post/slices';
 
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Button from '../common/Button';
 
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: '2rem',
-    },
-    header: {
-      paddingLeft: theme.spacing(1),
-    },
-    input: {
-      height: 40,
-    },
-    button: {
-      height: 40,
-      backgroundColor: 'black',
-      color: 'white',
-    },
-    tagsContainer: {
-      display: 'flex',
-    },
-    tags: {
-      padding: theme.spacing(1),
-    },
-  })
-);
+const TagBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+`;
+
+const Header = styled.h3`
+  padding-left: 1rem;
+`;
+
+const TagsInput = styled.input`
+  height: 2rem;
+`;
+
+const TagsBox = styled.div`
+  display: flex;
+`;
+
+const Tags = styled.h4`
+  padding: 1rem;
+`;
 
 const TagBox = () => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const postState: PostInputData = useTypedSelector((state) => state.post.data);
   const title = postState.title;
   const contents = postState.contents;
   const tags: string[] | null = postState.tag.split(',');
-  // const deadline = postState.deadline;
-  Object.preventExtensions(postState);
+
   const [tag, setTag] = useState<string | null>(null);
 
   useEffect(() => {
@@ -96,38 +86,30 @@ const TagBox = () => {
   );
 
   return (
-    <Box className={classes.container}>
-      <Typography className={classes.header}>태그</Typography>
-      <Box>
-        <TextField
-          variant="outlined"
-          placeholder="태그를 입력하세요"
-          InputProps={{
-            className: classes.input,
-          }}
-          value={tag}
-          onChange={onChange}
-        />
-        <Button variant="outlined" className={classes.button} onClick={onClick}>
-          추가
-        </Button>
-      </Box>
-      <Box className={classes.tagsContainer}>
+    <TagBlock>
+      <Header>태그</Header>
+      <div
+        style={{
+          display: 'flex',
+          width: '25%',
+          height: '1rem',
+        }}
+      >
+        <TagsInput placeholder="태그를 입력하세요" onChange={onChange} />
+        <Button onClick={onClick}>추가</Button>
+      </div>
+      <TagsBox>
         {tags &&
           tags.map((tag) => {
             if (tag !== '')
               return (
-                <Typography
-                  className={classes.tags}
-                  onClick={onRemove}
-                  key={tag}
-                >
+                <Tags onClick={onRemove} key={tag}>
                   #{tag}
-                </Typography>
+                </Tags>
               );
           })}
-      </Box>
-    </Box>
+      </TagsBox>
+    </TagBlock>
   );
 };
 
