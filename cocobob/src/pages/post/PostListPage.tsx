@@ -33,10 +33,10 @@ const PostListPage = () => {
   const loading = postListState.error.loading;
 
   useEffect(() => {
-    const { page } = qs.parse(location.search, {
+    const { page, keyword } = qs.parse(location.search, {
       ignoreQueryPrefix: true,
     });
-    dispatch(postsList(page));
+    dispatch(postsList({ page: page, keyword: keyword }));
   }, [dispatch, location.search]);
 
   return (
