@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { PostInputData, PostState, PostSuccessData } from '../../types/types';
+import {
+  PostChangeData,
+  PostInputData,
+  PostState,
+  PostSuccessData,
+} from '../../types/types';
 
 const initialData: PostInputData = {
   title: '',
@@ -13,6 +18,7 @@ const initialState: PostState = {
     loading: false,
     error: null,
   },
+  change: -1,
   data: initialData,
   success: null,
 };
@@ -40,6 +46,20 @@ export const postSlice = createSlice({
       state.error.loading = false;
       state.error.error = action.payload;
     },
+    changePost(state, action: PayloadAction<PostChangeData>) {
+      state.error.loading = true;
+      state.error.error = null;
+      state.data = action.payload;
+    },
+    changePostSuccess(state, action: PayloadAction<number>) {
+      state.error.loading = false;
+      state.error.error = null;
+      state.change = action.payload;
+    },
+    changePostFailure(state, action: PayloadAction<AxiosError>) {
+      state.error.loading = false;
+      state.error.error = action.payload;
+    },
     readPost(state, action: PayloadAction<number>) {
       state.error.loading = true;
       state.error.error = null;
@@ -51,6 +71,19 @@ export const postSlice = createSlice({
       state.success = action.payload;
     },
     readPostFailure(state, action: PayloadAction<AxiosError>) {
+      state.error.loading = false;
+      state.error.error = action.payload;
+    },
+    deletePost(state, action: PayloadAction<number>) {
+      state.error.loading = true;
+      state.error.error = null;
+      state.success = null;
+    },
+    deletePostSuccess(state) {
+      state.error.loading = false;
+      state.error.error = null;
+    },
+    deletePostFailure(state, action: PayloadAction<AxiosError>) {
       state.error.loading = false;
       state.error.error = action.payload;
     },
@@ -66,9 +99,15 @@ export const {
   writePost,
   writePostSuccess,
   writePostFailure,
+  changePost,
+  changePostSuccess,
+  changePostFailure,
   readPost,
   readPostSuccess,
   readPostFailure,
+  deletePost,
+  deletePostSuccess,
+  deletePostFailure,
   unloadPost,
 } = postSlice.actions;
 

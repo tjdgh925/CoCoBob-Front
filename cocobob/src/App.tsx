@@ -9,6 +9,7 @@ import HeaderTab from './components/common/HeaderTab';
 
 import Responsive from './components/common/Responsive';
 import ResetPasswordPage from './pages/auth/ResetPasswordPage';
+import UpdatePostPage from './pages/post/UpdatePostPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route component={RegisterPage} path="/register" exact />
         <Route component={WritePage} path="/write" exact />
         <Route component={PostPage} path="/post/:postId" exact />
+        <Route component={UpdatePostPage} path="/post/update/:postId" exact />
       </Responsive>
     </>
   );

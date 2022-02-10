@@ -1,4 +1,3 @@
-import { title } from 'process';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -6,7 +5,7 @@ import styled from 'styled-components';
 import PostViewer from '../../components/post/PostViewer';
 import { readPost, unloadPost } from '../../features/post/slices';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostState, PostSuccessData } from '../../types/types';
+import { PostState } from '../../types/types';
 
 interface MatchParams {
   postId: string;

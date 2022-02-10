@@ -37,6 +37,7 @@ export interface PostInputData {
 export interface PostState {
   error: ErrorData;
   data: PostInputData;
+  change: number;
   success: PostSuccessData | null;
 }
 
@@ -64,4 +65,11 @@ export interface PostListState {
 export interface Comment {
   content: string;
   username: string;
+}
+
+export interface PostChangeData {
+  id: any;
+  title: string;
+  contents: string;
+  tag: string;
 }

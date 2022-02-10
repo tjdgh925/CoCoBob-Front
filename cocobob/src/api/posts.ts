@@ -1,6 +1,6 @@
 import cocobob from './cocobob';
 import qs from 'qs';
-import { PostInputData } from '../types/types';
+import { PostChangeData, PostInputData } from '../types/types';
 
 export async function writePost({ title, contents, tag }: PostInputData) {
   const response = await cocobob
@@ -41,6 +41,31 @@ export async function postsList(page: any) {
     })
     .then((response) => {
       return response;
+    });
+  return response;
+}
+
+export async function deletePost(id: number) {
+  await cocobob.delete(`/api/boards/${id}`, {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  });
+}
+
+export async function changePost({ id, title, contents, tag }: PostChangeData) {
+  const response = await cocobob
+    .put(
+      `/api/boards/${id}`,
+      { title, contents, tag },
+      {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
     });
   return response;
 }
