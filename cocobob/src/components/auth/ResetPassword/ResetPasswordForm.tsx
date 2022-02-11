@@ -2,6 +2,18 @@ import styled from 'styled-components';
 import ErrorMessage from '../../common/ErrorMessage';
 import palette from '../../../lib/styles/palette';
 import Spacer from '../../common/Spacer';
+import { ResetPasswordState } from '../../../types/types';
+
+interface ResetPasswordFormProps {
+  state: ResetPasswordState;
+  email: string;
+  verification: string;
+  password: string;
+  passwordConfirm: string;
+  sendEmail: (e: any) => void;
+  onChange: (e: any) => void;
+  checkPassword: (passwordConfirm: string) => boolean;
+}
 
 const ResetPasswordFormBlock = styled.div`
   padding-bottom: 1rem;
@@ -63,6 +75,10 @@ const StyledButton = styled.button`
   justify-content: center;
   width: 3.5rem;
   height: 2rem;
+  :disabled {
+    color: red;
+    background-color: ${palette.gray[0]};
+  }
 `;
 
 const PasswordError = styled.div`
@@ -70,26 +86,46 @@ const PasswordError = styled.div`
     color: ${palette.error};
   }
 `;
-const ResetPasswordForm = () => {
-  const temp = false;
-  return temp ? (
+const ResetPasswordForm = ({
+  state,
+  email,
+  verification,
+  password,
+  passwordConfirm,
+  onChange,
+  sendEmail,
+  checkPassword,
+}: ResetPasswordFormProps) => {
+  const { error, verify, username } = state;
+
+  return !verify ? (
     <ResetPasswordFormBlock>
       <h3>비밀번호 재설정</h3>
       <form id="resetPassword1" autoComplete="off">
         <EmailDiv>
-          <EmailInput name="username" placeholder={'아이디를 입력해주세요.'} />
-          <StyledButton>전송</StyledButton>
+          <EmailInput
+            name="email"
+            placeholder={'아이디를 입력해주세요.'}
+            value={email}
+            onChange={onChange}
+          />
+          <StyledButton disabled={username === email} onClick={sendEmail}>
+            전송
+          </StyledButton>
         </EmailDiv>
         <Spacer />
         <Spacer />
         <StyledInput
-          name="certification"
+          name="verification"
           placeholder={'인증번호를 입력해주세요.'}
+          value={verification}
+          onChange={onChange}
+          disabled={username !== email}
         />
       </form>
-      {/* {error.error?.message !== undefined && (
-        <ErrorMessage>{'로 그 인 실 패 !'}</ErrorMessage>
-      )} */}
+      {error.error?.message !== undefined && (
+        <ErrorMessage>{'이메일을 다시 확인해주세요 !'}</ErrorMessage>
+      )}
     </ResetPasswordFormBlock>
   ) : (
     <ResetPasswordFormBlock>
@@ -98,28 +134,28 @@ const ResetPasswordForm = () => {
         <StyledInput
           placeholder="비밀번호 입력"
           name="password"
-          // value={signUpInfo.user_pw}
-          // onChange={onChange}
+          value={password}
+          onChange={onChange}
           type="password"
         />
         <StyledInput
           placeholder="비밀번호 재입력"
           name="passwordConfirm"
-          // value={passwordConfirm}
-          // onChange={onChange}
+          value={passwordConfirm}
+          onChange={onChange}
           type="password"
         />
-        {/* {checkPassword(passwordConfirm) && passwordConfirm !== '' ? (
+        {checkPassword(passwordConfirm) && passwordConfirm !== '' ? (
           <PasswordError>
             <h4>비밀번호 불일치!</h4>
           </PasswordError>
         ) : (
           <Spacer />
-        )} */}
+        )}
       </form>
-      {/* {error.error?.message !== undefined && (
-          <ErrorMessage>{'로 그 인 실 패 !'}</ErrorMessage>
-        )} */}
+      {error.error?.message !== undefined && (
+        <ErrorMessage>{'비밀번호 변경  실 패 !'}</ErrorMessage>
+      )}
     </ResetPasswordFormBlock>
   );
 };

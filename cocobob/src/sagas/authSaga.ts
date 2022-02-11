@@ -11,6 +11,17 @@ import {
   checkFailure,
   check,
 } from '../features/auth/slices';
+import {
+  findPassword,
+  findPasswordSuccess,
+  findPasswordFailure,
+  verifyCode,
+  verifyCodeSuccess,
+  verifyCodeFailure,
+  updatePasswordSuccess,
+  updatePasswordFailure,
+  updatePassword,
+} from '../features/reset/slices';
 
 function* signUpSaga(action: ReturnType<typeof signUp>) {
   try {
@@ -41,8 +52,38 @@ function* checkSaga() {
   }
 }
 
+function* findPasswordSaga(action: ReturnType<typeof findPassword>) {
+  try {
+    yield call(authAPI.findPassword, action.payload);
+    yield put(findPasswordSuccess(action.payload));
+  } catch (e: any) {
+    yield put(findPasswordFailure(e));
+  }
+}
+
+function* verifyCodeSaga(action: ReturnType<typeof verifyCode>) {
+  try {
+    yield call(authAPI.verifyCode, action.payload);
+    yield put(verifyCodeSuccess());
+  } catch (e: any) {
+    yield put(verifyCodeFailure(e));
+  }
+}
+
+function* updatePasswordSaga(action: ReturnType<typeof updatePassword>) {
+  try {
+    yield call(authAPI.updatePassword, action.payload);
+    yield put(updatePasswordSuccess());
+  } catch (e: any) {
+    yield put(updatePasswordFailure(e));
+  }
+}
+
 export function* authSaga() {
   yield takeLatest(signUp, signUpSaga);
   yield takeLatest(login, loginSaga);
   yield takeLatest(check, checkSaga);
+  yield takeLatest(findPassword, findPasswordSaga);
+  yield takeLatest(verifyCode, verifyCodeSaga);
+  yield takeLatest(updatePassword, updatePasswordSaga);
 }

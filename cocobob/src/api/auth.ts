@@ -1,4 +1,4 @@
-import { LoginData, SignUpData } from '../types/types';
+import { LoginData, SignUpData, VerifyInput } from '../types/types';
 import cocobob from '../api/cocobob';
 
 //로그인
@@ -27,4 +27,22 @@ export async function check() {
       return response.data;
     });
   return response;
+}
+
+export async function findPassword(username: string) {
+  await cocobob.get(`/api/findPassword/${username}`);
+}
+
+export async function verifyCode({ username, password }: VerifyInput) {
+  await cocobob.post('/api/findPassword/verifyCode', {
+    username,
+    password,
+  });
+}
+
+export async function updatePassword({ username, password }: VerifyInput) {
+  await cocobob.post('/api/findPassword/updatePassword', {
+    username,
+    password,
+  });
 }

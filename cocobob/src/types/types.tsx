@@ -73,3 +73,15 @@ export interface PostChangeData {
   contents: string;
   tag: string;
 }
+
+export interface ResetPasswordState {
+  error: ErrorData;
+  verify: boolean;
+  username: string | null;
+  final: boolean;
+}
+
+export interface VerifyInput {
+  username: string;
+  password: string;
+}
