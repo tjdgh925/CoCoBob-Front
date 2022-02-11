@@ -128,7 +128,35 @@ const ResetPasswordForm = ({
       )}
     </ResetPasswordFormBlock>
   ) : (
-    <ResetPasswordFormBlock></ResetPasswordFormBlock>
+    <ResetPasswordFormBlock>
+      <h3>비밀번호 재설정</h3>
+      <form id="resetPassword2" autoComplete="off">
+        <StyledInput
+          placeholder="비밀번호 입력"
+          name="password"
+          value={password}
+          onChange={onChange}
+          type="password"
+        />
+        <StyledInput
+          placeholder="비밀번호 재입력"
+          name="passwordConfirm"
+          value={passwordConfirm}
+          onChange={onChange}
+          type="password"
+        />
+        {checkPassword(passwordConfirm) && passwordConfirm !== '' ? (
+          <PasswordError>
+            <h4>비밀번호 불일치!</h4>
+          </PasswordError>
+        ) : (
+          <Spacer />
+        )}
+      </form>
+      {error.error?.message !== undefined && (
+        <ErrorMessage>{'비밀번호 변경  실 패 !'}</ErrorMessage>
+      )}
+    </ResetPasswordFormBlock>
   );
 };
 

@@ -16,7 +16,7 @@ const ResetPasswordButton = ({
   return (
     <ButtonsBlock>
       <Button color={palette.main} onClick={resetPassword}>
-        다음
+        {!verify ? '다음' : '비밀번호 변경'}
       </Button>
     </ButtonsBlock>
   );
