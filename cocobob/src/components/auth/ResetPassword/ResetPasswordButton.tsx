@@ -4,10 +4,20 @@ import palette from '../../../lib/styles/palette';
 
 const ButtonsBlock = styled.div``;
 
-const ResetPasswordButton = () => {
+interface ResetPasswordButtonProps {
+  verify: boolean;
+  resetPassword: (e: any) => void;
+}
+
+const ResetPasswordButton = ({
+  verify,
+  resetPassword,
+}: ResetPasswordButtonProps) => {
   return (
     <ButtonsBlock>
-      <Button color={palette.main}>다음</Button>
+      <Button color={palette.main} onClick={resetPassword}>
+        다음
+      </Button>
     </ButtonsBlock>
   );
 };

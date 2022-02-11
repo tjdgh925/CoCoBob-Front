@@ -85,7 +85,6 @@ const Button = ({
   fontColor,
   opacity,
 }: ButtonProps) => {
-  console.log(children);
   return (
     <StyledButton
       color={color}

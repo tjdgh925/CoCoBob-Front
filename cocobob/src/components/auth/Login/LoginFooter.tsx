@@ -56,8 +56,7 @@ const LoginFooter = () => {
         <span>아이디 저장</span>
       </CheckBoxBlock>
       <FindBlock>
-        <StyledLink to="/">아이디 찾기</StyledLink>
-        <StyledLink to="/">비밀번호 찾기</StyledLink>
+        <StyledLink to="/resetPassword">비밀번호 변경</StyledLink>
       </FindBlock>
     </LoginFooterBlock>
   );

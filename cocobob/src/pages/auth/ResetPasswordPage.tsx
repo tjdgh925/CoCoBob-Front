@@ -3,6 +3,16 @@ import ResetPasswordForm from '../../components/auth/ResetPassword/ResetPassword
 import ResetPasswordButton from '../../components/auth/ResetPassword/ResetPasswordButton';
 import styled from 'styled-components';
 import Spacer from '../../components/common/Spacer';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useCallback } from 'react';
+import {
+  findPassword,
+  updatePassword,
+  verifyCode,
+} from '../../features/reset/slices';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ResetPasswordBlock = styled.div`
   position: absolute;
@@ -27,14 +37,70 @@ const ResetPasswordBox = styled.div`
 `;
 
 const ResetPasswordPage = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const ResetPasswordState = useTypedSelector((state) => state.reset);
+  const username = ResetPasswordState.username;
+  const verify: boolean = ResetPasswordState.verify;
+  const final: boolean = ResetPasswordState.final;
+
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+
+  const [email, setEmail] = useState<string>('');
+  const [verification, setVerification] = useState<string>('');
+
+  const sendEmail = useCallback(
+    (e) => {
+      e.preventDefault();
+      dispatch(findPassword(email));
+    },
+    [dispatch, email]
+  );
+
+  const resetPassword = useCallback(
+    (e) => {
+      if (username && !verify) {
+        dispatch(verifyCode({ username: username, password: verification }));
+      } else if (username && verify) {
+        dispatch(updatePassword({ username: username, password: password }));
+        if (final) history.push('/login');
+      }
+    },
+    [username, verify, dispatch, verification, password, final, history]
+  );
+
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    if (name === 'email') setEmail(value);
+    if (name === 'verification') setVerification(value);
+    if (name === 'password') setPassword(value);
+    if (name === 'passwordConfirm') setPasswordConfirm(value);
+  }, []);
+
+  const checkPassword = (passwordConfirm: string): boolean => {
+    if (passwordConfirm === password) return false;
+    else return true;
+  };
+
   return (
     <ResetPasswordBlock>
       <ResetPasswordBox>
         <AuthHeader />
-        <ResetPasswordForm />
+        <ResetPasswordForm
+          state={ResetPasswordState}
+          email={email}
+          password={password}
+          passwordConfirm={passwordConfirm}
+          checkPassword={checkPassword}
+          verification={verification}
+          sendEmail={sendEmail}
+          onChange={onChange}
+        />
         <Spacer />
         <Spacer />
-        <ResetPasswordButton />
+        <ResetPasswordButton verify={verify} resetPassword={resetPassword} />
       </ResetPasswordBox>
     </ResetPasswordBlock>
   );
