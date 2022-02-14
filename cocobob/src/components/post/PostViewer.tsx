@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { PostSuccessData } from '../../types/types';
+import { PostSuccessData, Reply } from '../../types/types';
 import CommentList from './CommentList';
 import CommentWrite from './CommentWrite';
 import ContentBody from './ContentBody';
@@ -25,12 +25,24 @@ const CommentBlock = styled.div`
 
 interface PostViewerProps {
   post: PostSuccessData | null;
+  reply: Reply[] | null;
+  replyInput: string;
+  onChangeReply: (e: any) => void;
+  writeComment: () => void;
 }
 
-const PostViewer = ({ post }: PostViewerProps) => {
+const PostViewer = ({
+  post,
+  reply,
+  replyInput,
+  onChangeReply,
+  writeComment,
+}: PostViewerProps) => {
   useEffect(() => {
     console.log(post);
+    console.log(reply);
   });
+
   return (
     <PostContentBlock>
       <ContentBlock>
@@ -38,8 +50,12 @@ const PostViewer = ({ post }: PostViewerProps) => {
         {/* <ContentSideView /> */}
       </ContentBlock>
       <CommentBlock>
-        <CommentWrite />
-        <CommentList />
+        <CommentWrite
+          replyInput={replyInput}
+          onChangeReply={onChangeReply}
+          writeComment={writeComment}
+        />
+        {reply && <CommentList reply={reply} />}
       </CommentBlock>
     </PostContentBlock>
   );
