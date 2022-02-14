@@ -62,11 +62,6 @@ export interface PostListState {
   success: PostSuccessData[] | null;
 }
 
-export interface Comment {
-  content: string;
-  username: string;
-}
-
 export interface PostChangeData {
   id: any;
   title: string;
@@ -84,4 +79,31 @@ export interface ResetPasswordState {
 export interface VerifyInput {
   username: string;
   password: string;
+}
+
+export interface Board {
+  id: number;
+  title: string;
+  username: string;
+  contents: string;
+  tag: string;
+  view: number;
+}
+
+export interface Reply {
+  rno: number;
+  username: string;
+  content: string;
+  board: Board;
+}
+
+export interface ReplyInput {
+  postId: number;
+  content: string;
+}
+
+export interface ReplyState {
+  error: ErrorData;
+  result: Reply[] | null;
+  writeSuccess: boolean;
 }

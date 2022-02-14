@@ -55,7 +55,9 @@ const PostPage = ({ match }: RouteComponentProps<MatchParams>) => {
     };
   }, [dispatch, postId]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (ReplyState.writeSuccess) history.go(0);
+  }, [ReplyState.writeSuccess]);
 
   return (
     <PostPageBlock>

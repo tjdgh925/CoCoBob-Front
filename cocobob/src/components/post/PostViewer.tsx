@@ -38,11 +38,6 @@ const PostViewer = ({
   onChangeReply,
   writeComment,
 }: PostViewerProps) => {
-  useEffect(() => {
-    console.log(post);
-    console.log(reply);
-  });
-
   return (
     <PostContentBlock>
       <ContentBlock>

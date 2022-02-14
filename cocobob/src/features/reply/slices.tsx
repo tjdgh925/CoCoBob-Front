@@ -8,6 +8,7 @@ const initialState: ReplyState = {
     error: null,
   },
   result: null,
+  writeSuccess: false,
 };
 export const replySlice = createSlice({
   name: 'reply',
@@ -20,6 +21,7 @@ export const replySlice = createSlice({
     writeReplySuccess(state) {
       state.error.loading = false;
       state.error.error = null;
+      state.writeSuccess = true;
     },
     writeReplyFailure(state, action: PayloadAction<AxiosError>) {
       state.error.loading = false;
