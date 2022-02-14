@@ -5,6 +5,9 @@ import { deletePost } from '../../features/post/slices';
 import { PostSuccessData } from '../../types/types';
 import ContentInfo from '../common/ContentInfo';
 
+import Edit from '../../image/write.png';
+import Delete from '../../image/delete.png';
+
 const ContentBodyBlock = styled.div`
   width: 100%;
   display: flex;
@@ -42,6 +45,18 @@ const Body = styled.div`
   padding-top: 3rem;
 `;
 
+const ImageWrapper = styled.button`
+  background: none;
+  border: none;
+`;
+
+const Image = styled.img`
+  align-self: center;
+  height: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
 interface ContentBodyProps {
   post: PostSuccessData;
 }
@@ -60,10 +75,15 @@ const ContentBody = ({ post }: ContentBodyProps) => {
         <Title>{post?.title}</Title>
         {post.username === localStorage.getItem('username') ? (
           <ButtonBlock>
-            <Link to={`/post/update/${post.id}`}>
-              <button>수정</button>
-            </Link>
-            <button onClick={onDelete}>삭제</button>
+            <ImageWrapper>
+              <Link to={`/post/update/${post.id}`}>
+                <Image src={Edit} alt={'수정'} />
+              </Link>
+            </ImageWrapper>
+            <ImageWrapper onClick={onDelete}>
+              {' '}
+              <Image src={Delete} alt={'삭제'} />
+            </ImageWrapper>
           </ButtonBlock>
         ) : (
           <></>

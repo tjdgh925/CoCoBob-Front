@@ -19,7 +19,7 @@ const Header = styled.h3`
 `;
 
 const TagsInput = styled.input`
-  height: 2rem;
+  padding-left: 0.5rem;
 `;
 
 const TagsBox = styled.div`
@@ -28,61 +28,41 @@ const TagsBox = styled.div`
 
 const Tags = styled.h4`
   padding: 1rem;
+  cursor: pointer;
 `;
 
-const TagBox = () => {
-  const dispatch = useDispatch();
-  const postState: PostInputData = useTypedSelector((state) => state.post.data);
-  const title = postState.title;
-  const contents = postState.contents;
-  const tags: string[] | null = postState.tag.split(',');
+interface TagBoxProps {
+  tags: string;
+  onTagChange: (str: string) => void;
+}
 
-  const [tag, setTag] = useState<string | null>(null);
+const TagBox = ({ tags, onTagChange }: TagBoxProps) => {
+  const [tag, setTag] = useState<string>('');
 
-  useEffect(() => {
-    return () => {
-      dispatch(initialize());
-    };
-  }, [dispatch]);
-
-  const onChange = useCallback((e) => {
+  const onChange = (e: any) => {
     const { value } = e.target;
     setTag(value);
-  }, []);
+  };
 
-  const onClick = useCallback(
-    (e) => {
-      if (!tag) return;
-      if (tags.includes(tag)) return;
-      const temp: string[] = [...tags, tag];
-      dispatch(
-        updatePost({
-          title: title,
-          contents: contents,
-          tag: temp.toString(),
-          // deadline: deadline,
-        })
-      );
-      setTag('');
-    },
-    [tag, tags, dispatch, title, contents]
-  );
+  const onClick = () => {
+    const temp: string[] = tags.split(', ');
+    if (tag === '') return;
+    if (temp.includes(tag)) return;
+    onTagChange(tags + ', ' + tag);
+    setTag('');
+  };
 
   const onRemove = useCallback(
     (e) => {
       const value = e.target.innerText;
-      const temp = tags.filter((temp) => temp !== value.substr(1));
+      const temp: string[] = tags.split(', ');
 
-      dispatch(
-        updatePost({
-          title: title,
-          contents: contents,
-          tag: temp.toString(),
-          // deadline: deadline,
-        })
+      const removed: string[] = temp.filter(
+        (removed) => removed !== value.substr(1)
       );
+      onTagChange(removed.join(', '));
     },
-    [tags, dispatch, title, contents]
+    [onTagChange, tags]
   );
 
   return (
@@ -92,15 +72,18 @@ const TagBox = () => {
         style={{
           display: 'flex',
           width: '25%',
-          height: '1rem',
         }}
       >
-        <TagsInput placeholder="태그를 입력하세요" onChange={onChange} />
+        <TagsInput
+          placeholder="태그를 입력하세요"
+          value={tag}
+          onChange={onChange}
+        />
         <Button onClick={onClick}>추가</Button>
       </div>
       <TagsBox>
         {tags &&
-          tags.map((tag) => {
+          tags.split(', ').map((tag) => {
             if (tag !== '')
               return (
                 <Tags onClick={onRemove} key={tag}>

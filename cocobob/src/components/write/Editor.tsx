@@ -75,13 +75,22 @@ const Select = styled.select`
 `;
 
 interface EditorProps {
-  changeTitle: (e: any) => void;
-  changeBody: (e: any) => void;
   title: string;
   contents: string;
+  tag: string;
+  onTitleChange: (e: any) => void;
+  onContentsChange: (e: any) => void;
+  onTagChange: (str: string) => void;
 }
 
-const Editor = ({ changeTitle, changeBody, title, contents }: EditorProps) => {
+const Editor = ({
+  title,
+  contents,
+  tag,
+  onTitleChange,
+  onContentsChange,
+  onTagChange,
+}: EditorProps) => {
   const dispatch = useDispatch();
   const QuillRef = useRef<ReactQuill>();
 
@@ -127,7 +136,7 @@ const Editor = ({ changeTitle, changeBody, title, contents }: EditorProps) => {
         name={'title'}
         placeholder={'제목을 입력하세요'}
         value={title}
-        onChange={changeTitle}
+        onChange={onTitleChange}
       />
       {/* <DeadLineBlock>
         <h2>마감 시간: </h2>
@@ -180,12 +189,12 @@ const Editor = ({ changeTitle, changeBody, title, contents }: EditorProps) => {
           }
         }}
         value={contents}
-        onChange={changeBody}
+        onChange={onContentsChange}
         modules={modules}
         theme="snow"
         placeholder="원하는 장소, 시간, 메뉴 대해 구체적으로 작성 부탁드려요!"
       />
-      <TagBox />
+      <TagBox tags={tag} onTagChange={onTagChange} />
     </EditorBlock>
   );
 };

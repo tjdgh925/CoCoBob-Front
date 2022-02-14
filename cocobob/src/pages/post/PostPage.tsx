@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PostViewer from '../../components/post/PostViewer';
-import { readPost, unloadPost } from '../../features/post/slices';
+import { initialize, readPost, unloadPost } from '../../features/post/slices';
 import { getReply, writeReply } from '../../features/reply/slices';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { PostState, ReplyState } from '../../types/types';

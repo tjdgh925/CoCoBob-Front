@@ -38,15 +38,19 @@ const EditorBlock = styled.div`
 interface UpdatePostProps {
   titleChange: string;
   contentsChange: string;
+  tagChange: string;
   onTitleChange: (e: any) => void;
   onContentsChange: (e: any) => void;
+  onTagChange: (str: string) => void;
 }
 
 const UpdatePost = ({
   titleChange,
   contentsChange,
+  tagChange,
   onTitleChange,
   onContentsChange,
+  onTagChange,
 }: UpdatePostProps) => {
   const QuillRef = useRef<ReactQuill>();
   const modules = useMemo(
@@ -82,7 +86,7 @@ const UpdatePost = ({
         theme="snow"
         placeholder="원하는 장소, 시간, 메뉴 대해 구체적으로 작성 부탁드려요!"
       />
-      <TagBox />
+      <TagBox tags={tagChange} onTagChange={onTagChange} />
     </EditorBlock>
   );
 };

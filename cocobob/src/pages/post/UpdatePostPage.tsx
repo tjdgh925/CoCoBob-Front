@@ -12,11 +12,10 @@ interface MatchParams {
   postId: string;
 }
 const UpdatePostPageBlock = styled.div`
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const UpdatePostPage = ({ match }: RouteComponentProps<MatchParams>) => {
@@ -41,12 +40,16 @@ const UpdatePostPage = ({ match }: RouteComponentProps<MatchParams>) => {
   const [contentsChange, setContentsChange] = useState<any>(
     success && success.contents
   );
+  const [tagChange, setTagChange] = useState<any>(success && success.tag);
   const onTitleChange = useCallback((e) => {
     const { value } = e.target;
     setTitleChange(value);
   }, []);
   const onContentsChange = useCallback((e) => {
     setContentsChange(e);
+  }, []);
+  const onTagChange = useCallback((str: string) => {
+    setTagChange(str);
   }, []);
 
   const onPublish = () => {
@@ -55,7 +58,7 @@ const UpdatePostPage = ({ match }: RouteComponentProps<MatchParams>) => {
         id: postId,
         title: titleChange,
         contents: contentsChange,
-        tag: '',
+        tag: tagChange,
         // deadline: 'dd',
       })
     );
@@ -67,6 +70,8 @@ const UpdatePostPage = ({ match }: RouteComponentProps<MatchParams>) => {
         <UpdatePost
           titleChange={titleChange}
           contentsChange={contentsChange}
+          tagChange={tagChange}
+          onTagChange={onTagChange}
           onTitleChange={onTitleChange}
           onContentsChange={onContentsChange}
         />
