@@ -25,28 +25,34 @@ const CommentButtons = styled.div`
   width: 20%;
 `;
 
-const CommentWrite = () => {
-  const [comment, setComment] = useState<string>('');
-  const onChange = useCallback((e) => {
-    const { value } = e.target;
-    setComment(value);
-  }, []);
+interface CommentWriteProps {
+  replyInput: string;
+  onChangeReply: (e: any) => void;
+  writeComment: () => void;
+}
 
+const CommentWrite = ({
+  replyInput,
+  onChangeReply,
+  writeComment,
+}: CommentWriteProps) => {
   return (
     <CommentWriteBlock>
       <h3>댓글작성</h3>
       <CommentWriteBox>
         <CommentInput
-          value={comment}
+          value={replyInput}
           placeholder="댓글을 남겨주세요."
-          onChange={onChange}
+          onChange={onChangeReply}
         />
         <CommentButtons>
           <Button color={palette.gray[3]}>취소</Button>
-          {comment === '' ? (
+          {replyInput === '' ? (
             <Button color={palette.gray[3]}>댓글</Button>
           ) : (
-            <Button color={palette.main}>댓글</Button>
+            <Button color={palette.main} onClick={writeComment}>
+              댓글
+            </Button>
           )}
         </CommentButtons>
       </CommentWriteBox>

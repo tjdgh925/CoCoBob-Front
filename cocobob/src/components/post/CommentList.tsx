@@ -1,27 +1,6 @@
 import styled from 'styled-components';
-import { Comment } from '../../types/types';
-
-const testComments: Comment[] = [
-  {
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
-    username: '사용자1',
-  },
-  {
-    content:
-      'Phasellus mattis diam ac dolor feugiat, eu fringilla elit bibendum.',
-    username: '사용자2',
-  },
-  {
-    content:
-      'Duis imperdiet magna vitae lacus scelerisque, maximus euismod risus fringilla.',
-    username: '사용자3',
-  },
-  {
-    content:
-      'Pellentesque id odio finibus, imperdiet tellus ac, scelerisque ligula.',
-    username: '사용자4',
-  },
-];
+import palette from '../../lib/styles/palette';
+import { Reply } from '../../types/types';
 
 const CommentListBlock = styled.div`
   display: flex;
@@ -30,24 +9,34 @@ const CommentListBlock = styled.div`
 const CommentItemBlock = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid ${palette.gray[2]};
 `;
 
 interface CommentItemProps {
-  comment: Comment;
+  content: string;
+  username: string;
+}
+interface CommentListProps {
+  reply: Reply[];
 }
 
-const CommentList = () => {
+const CommentList = ({ reply }: CommentListProps) => {
   return (
     <CommentListBlock>
-      {testComments.map((comment) => (
-        <CommentItem comment={comment} />
+      {reply.map((reply) => (
+        <CommentItem
+          key={reply.rno}
+          content={reply.content}
+          username={reply.username}
+        />
       ))}
     </CommentListBlock>
   );
 };
 
-const CommentItem = ({ comment }: CommentItemProps) => {
-  const { content, username } = comment;
+const CommentItem = ({ content, username }: CommentItemProps) => {
   return (
     <CommentItemBlock>
       <h4>{username}</h4>

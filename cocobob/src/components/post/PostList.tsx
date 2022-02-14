@@ -121,7 +121,7 @@ const PostList = ({ posts, loading, error }: PostListProps) => {
       {posts && (
         <PostGridBlock>
           {posts.map((post) => (
-            <StyledLink to={`/post/${post.id}`}>
+            <StyledLink to={`/post/${post.id}`} key={post.id}>
               <PostItem post={post} key={post.id} />
             </StyledLink>
           ))}
