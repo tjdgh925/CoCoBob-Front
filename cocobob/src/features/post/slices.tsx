@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
+import { startOfWeek } from 'date-fns';
 import {
   PostChangeData,
   PostInputData,
@@ -64,6 +65,7 @@ export const postSlice = createSlice({
       state.error.loading = true;
       state.error.error = null;
       state.success = null;
+      state.change = -1;
     },
     readPostSuccess(state, action: PayloadAction<PostSuccessData>) {
       state.error.loading = false;

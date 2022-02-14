@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { PostInputData, PostSuccessData } from '../../types/types';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { updatePost, writePost } from '../../features/post/slices';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -20,40 +20,24 @@ const WritePage = () => {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const postState: PostInputData = useTypedSelector((state) => state.post.data);
   const success: PostSuccessData | null = useTypedSelector(
     (state) => state.post.success
   );
-  const title = postState.title;
-  const contents = postState.contents;
-  const tag = postState.tag;
 
-  const changeTitle = useCallback(
-    (e) => {
-      const { value } = e.target;
-      dispatch(
-        updatePost({
-          title: value,
-          contents: contents,
-          tag: tag,
-        })
-      );
-    },
-    [dispatch, contents, tag]
-  );
+  const [title, setTitle] = useState<string>('');
+  const [contents, setContents] = useState<string>('');
+  const [tag, setTag] = useState<string>('');
 
-  const changeBody = useCallback(
-    (e) => {
-      dispatch(
-        updatePost({
-          title: title,
-          contents: e,
-          tag: tag,
-        })
-      );
-    },
-    [dispatch, title, tag]
-  );
+  const onTitleChange = useCallback((e) => {
+    const { value } = e.target;
+    setTitle(value);
+  }, []);
+  const onContentsChange = useCallback((e) => {
+    setContents(e);
+  }, []);
+  const onTagChange = useCallback((str: string) => {
+    setTag(str);
+  }, []);
 
   const onPublish = () => {
     dispatch(
@@ -72,10 +56,12 @@ const WritePage = () => {
   return (
     <WritePageBlock>
       <Editor
-        changeTitle={changeTitle}
-        changeBody={changeBody}
         title={title}
         contents={contents}
+        tag={tag}
+        onTagChange={onTagChange}
+        onTitleChange={onTitleChange}
+        onContentsChange={onContentsChange}
       />
       <WriteActionButtons onPublish={onPublish} />
     </WritePageBlock>
