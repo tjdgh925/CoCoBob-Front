@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 import Button from '../../components/common/Button';
-import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 

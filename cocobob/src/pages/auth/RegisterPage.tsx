@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import AuthHeader from '../../components/common/AuthHeader';

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../features/auth/slices';
+import { logout, refresh } from '../../features/auth/slices';
 import Button from './Button';
 import palette from '../../lib/styles/palette';
 
@@ -72,6 +72,9 @@ const HeaderTab = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('token');
   };
+  const doRefresh = () => {
+    dispatch(refresh());
+  };
   return (
     <>
       <HeaderBlock>
@@ -90,7 +93,9 @@ const HeaderTab = () => {
           ) : (
             <div className="right">
               <Link to="/login">
-                <Button color={palette.main}>로그인</Button>
+                <Button color={palette.main} onClick={doRefresh}>
+                  로그인
+                </Button>
               </Link>
             </div>
           )}

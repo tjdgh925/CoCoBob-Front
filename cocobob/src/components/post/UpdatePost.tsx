@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -52,7 +52,7 @@ const UpdatePost = ({
   onContentsChange,
   onTagChange,
 }: UpdatePostProps) => {
-  const QuillRef = useRef<ReactQuill>();
+  // const QuillRef = useRef<ReactQuill>();
   const modules = useMemo(
     () => ({
       toolbar: {
@@ -75,11 +75,7 @@ const UpdatePost = ({
         onChange={onTitleChange}
       />
       <ReactQuill
-        ref={(element) => {
-          if (element !== null) {
-            QuillRef.current = element;
-          }
-        }}
+        ref={(element) => {}}
         value={contentsChange}
         onChange={onContentsChange}
         modules={modules}

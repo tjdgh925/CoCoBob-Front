@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
 import styled from 'styled-components';
 import { PostSuccessData, Reply } from '../../types/types';
 import CommentList from './CommentList';
 import CommentWrite from './CommentWrite';
 import ContentBody from './ContentBody';
-import ContentSideView from './ContentSideView';
 
 const PostContentBlock = styled.div`
   flex-direction: column;

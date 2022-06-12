@@ -1,4 +1,20 @@
 # 밥 먹을 친구 찾을 땐? CO-CO-BOB
+<<<<<<< Updated upstream
+=======
+
+## 개발자
+
+- [장성호](https://github.com/tjdgh925) : Front
+- [이아린](https://github.com/Arin0421) : Back
+- [이가영](https://github.com/GaYeongLee0419) : Back
+
+## 기술 스택
+
+- Front-end : Typescript, React
+- Back-end : SpringBoot, JPA, MySQL
+
+## 데모 영상
+>>>>>>> Stashed changes
 
 ## 개발자
 

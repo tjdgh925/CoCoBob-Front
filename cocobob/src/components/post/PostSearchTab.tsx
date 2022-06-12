@@ -60,7 +60,7 @@ const PostSearchTab = () => {
       else params.append('page', '0');
     }
     history.push({ search: params.toString() });
-  }, [history, query, location.search]);
+  }, [history, query, location.search, params]);
 
   return (
     <SearchTabBlock>

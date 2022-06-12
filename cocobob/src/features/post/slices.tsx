@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { startOfWeek } from 'date-fns';
 import {
   PostChangeData,
   PostInputData,

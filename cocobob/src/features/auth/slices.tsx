@@ -65,6 +65,9 @@ export const authSlice = createSlice({
       state.error.loading = false;
       state.auth = false;
     },
+    refresh(state) {
+      state.error.error = null;
+    },
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   checkSuccess,
   checkFailure,
   logout,
+  refresh,
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -10,10 +10,6 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { postsList } from '../../features/postsList/slices';
 import Pagination from '../../components/post/Pagination';
 
-interface MatchParams {
-  username: string;
-}
-
 const PostListBlock = styled.div`
   height: 100%;
   display: flex;

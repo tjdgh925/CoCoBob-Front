@@ -1,7 +1,3 @@
-import TextField from '@mui/material/TextField';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 import { SignUpData } from '../../../types/types';
 import styled from 'styled-components';
 import palette from '../../../lib/styles/palette';
@@ -39,34 +35,6 @@ const PasswordError = styled.div`
     color: ${palette.error};
   }
 `;
-
-const BirthGenderBlock = styled.div`
-  display: flex;
-`;
-
-const RadioContainer = styled.div`
-  display: flex;
-  border: #e3e3e3 2px solid;
-  border-radius: 10px;
-  height: 100%;
-  justify-content: space-between;
-  padding: 1rem 0 1rem 0;
-  width: 50%;
-  justify-content: center;
-  align-items: center;
-  span {
-    font-weight: 700;
-    padding-right: 10px;
-  }
-`;
-
-const Label = styled.label`
-  width: 40px;
-`;
-
-const RadioButton = styled.input.attrs({
-  type: 'radio',
-})``;
 
 interface RegisterFormProps {
   signUpInfo: SignUpData;
@@ -116,25 +84,6 @@ const RegisterForm = ({
         ) : (
           <Spacer />
         )}
-        <BirthGenderBlock>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="생일"
-              value={birthday}
-              onChange={(date) => {
-                setBirthday(date);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-          <RadioContainer>
-            <span>성별</span>
-            <Label>남자</Label>
-            <RadioButton value="male" name="sex" onChange={onChange} />
-            <Label>여자</Label>
-            <RadioButton value="female" name="sex" onChange={onChange} />
-          </RadioContainer>
-        </BirthGenderBlock>
       </form>
     </RegisterFormBlock>
   );

@@ -1,5 +1,5 @@
 import cocobob from './cocobob';
-import qs from 'qs';
+
 import { PostChangeData, PostInputData } from '../types/types';
 
 export async function writePost({ title, contents, tag }: PostInputData) {

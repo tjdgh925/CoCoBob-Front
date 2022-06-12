@@ -1,5 +1,5 @@
 import cocobob from './cocobob';
-import { Reply, ReplyInput } from '../types/types';
+import { ReplyInput } from '../types/types';
 
 export async function writeReply({ postId, content }: ReplyInput) {
   await cocobob.post(

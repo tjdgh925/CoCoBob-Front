@@ -1,8 +1,6 @@
-import Button from '../common/Button';
-
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import image from '../../image/test2.jpeg';
+import image from '../../image/test2.png';
 import ErrorMessage from '../common/ErrorMessage';
 
 import Tags from '../common/Tags';
@@ -72,18 +70,6 @@ const Username = styled.h5`
   color: ${palette.gray[2]};
 `;
 
-const WriteButton = styled.button`
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.25rem 1rem;
-  color: white;
-  outline: none;
-  cursor: pointer;
-  background: coral;
-  justify-self: end;
-`;
-
 const PostFooter = styled.div`
   display: flex;
   justify-content: space-between;
@@ -106,18 +92,11 @@ const PostItem = ({ post }: PostItemProps) => {
 };
 
 const PostList = ({ posts, loading, error }: PostListProps) => {
-  const user = localStorage.getItem('username');
   if (error) {
     return <ErrorMessage>에러가 발생!!</ErrorMessage>;
   }
   return (
     <PostListBlock>
-      {user && (
-        <Link to="write">
-          <WriteButton>새 글 작성하기</WriteButton>
-        </Link>
-      )}
-
       {posts && (
         <PostGridBlock>
           {posts.map((post) => (

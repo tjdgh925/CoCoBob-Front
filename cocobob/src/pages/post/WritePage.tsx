@@ -3,9 +3,9 @@ import WriteActionButtons from '../../components/write/WriteActionButtons';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostInputData, PostSuccessData } from '../../types/types';
+import { PostSuccessData } from '../../types/types';
 import { useCallback, useState } from 'react';
-import { updatePost, writePost } from '../../features/post/slices';
+import { writePost } from '../../features/post/slices';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -45,7 +45,6 @@ const WritePage = () => {
         title,
         contents,
         tag,
-        // deadline: 'dd',
       })
     );
   };

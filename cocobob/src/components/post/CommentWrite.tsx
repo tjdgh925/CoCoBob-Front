@@ -1,4 +1,3 @@
-import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Button from '../common/Button';

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { RouteComponentProps, useHistory, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import PostViewer from '../../components/post/PostViewer';
-import { initialize, readPost, unloadPost } from '../../features/post/slices';
+import { readPost, unloadPost } from '../../features/post/slices';
 import { getReply, writeReply } from '../../features/reply/slices';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { PostState, ReplyState } from '../../types/types';
@@ -39,13 +39,10 @@ const PostPage = ({ match }: RouteComponentProps<MatchParams>) => {
     );
   };
 
-  const onChangeReply = useCallback(
-    (e) => {
-      const { value } = e.target;
-      setReplyInput(value);
-    },
-    [replyInput]
-  );
+  const onChangeReply = useCallback((e) => {
+    const { value } = e.target;
+    setReplyInput(value);
+  }, []);
 
   useEffect(() => {
     dispatch(readPost(parseInt(postId)));
@@ -57,7 +54,7 @@ const PostPage = ({ match }: RouteComponentProps<MatchParams>) => {
 
   useEffect(() => {
     if (ReplyState.writeSuccess) history.go(0);
-  }, [ReplyState.writeSuccess]);
+  }, [ReplyState.writeSuccess, history]);
 
   return (
     <PostPageBlock>

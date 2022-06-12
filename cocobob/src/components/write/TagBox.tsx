@@ -1,9 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { PostInputData } from '../../types/types';
-import { initialize, updatePost } from '../../features/post/slices';
-
+import { useState, useCallback } from 'react';
 import Button from '../common/Button';
 
 import styled from 'styled-components';
